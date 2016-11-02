@@ -11,24 +11,34 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Vector2f;
 
-import game.utils.Config;
 import game.utils.ResourceStore;
 
-public class Planet extends AbstractPlanet{
+public class Planet implements PlanetI{
 	
-	private int populationCurrenTimer;
-	private int populationMaxTimer;
-	private int populationMax;
-	private float speedUp;
-	private final int populationMaxConst;	// max population
-	private final int populationSmallMaxConst; // max population for empty player (default player 0, gray)
+	protected int populationCurrenTimer;
+	protected int populationMaxTimer;
+	protected int populationMax;
+	protected int speedUp;
+	protected Vector2f position;
+	protected int radius;
+	protected int id;
+	protected int population;
+	protected List<PopulationToMove> populationToMove;
+	protected Owner owner;
+	protected int populationMaxConst;	// max population
+	protected int populationSmallMaxConst; // max population for empty player (default player 0, gray)
+	
 	private float selectOpacity;
+	
 	
 	private Image image;
 	private int planetType;
 	
-	public Planet(int postionX, int positionY, int radius, int id, int planetType, int populationMaxConst, int populationSmallMaxConst) {
-		super(postionX, positionY, radius, id);
+	public Planet(int positionX, int positionY, int radius, int id, int planetType, int populationMaxConst, int populationSmallMaxConst) {
+		position = new Vector2f(positionX, positionY);
+		this.radius = radius;
+		this.id = id;
+		this.populationToMove = new ArrayList<PopulationToMove>();
 		this.population = 15;
 		// population max timer and speed up are dependent
 		this.populationMaxTimer = 1000;
@@ -113,12 +123,12 @@ public class Planet extends AbstractPlanet{
 		return this.populationMaxTimer;
 	}
 	
-	public void setPopulationSpeedUp(float speedUp) {
-		this.populationMaxTimer = (int)(1000f/speedUp);
+	public void setPopulationSpeedUp(int speedUp) {
+		this.populationMaxTimer = (int)(1000f/(float)speedUp);
 		this.speedUp = speedUp;
 	}
 	
-	public float getPopulationSpeedUp() {
+	public int getPopulationSpeedUp() {
 		return this.speedUp;
 	}
 
@@ -130,6 +140,110 @@ public class Planet extends AbstractPlanet{
 			populationMax = populationMaxConst;
 		}
 	}
+	
+	public boolean checkCollision(Vector2f mousePosition) {
+		if (position.distance(mousePosition) < radius) {
+			return true;
+		}
+		
+		return false;
+	}
 
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
 
+	public int getRadius() {
+		return this.radius;
+	}
+
+	public void setPosition(Vector2f position) {
+		this.position = position;
+	}
+
+	public Vector2f getPosition() {
+		return this.position;
+	}
+	
+	public int getPositionX() {
+		return (int) this.position.getX();
+	}
+	
+	public int getPositionY() {
+		return (int) this.position.getY();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getPopulation() {
+		return population;
+	}
+
+	public void setPopulation(int population) {
+		this.population = population;
+	}
+
+	public List<PopulationToMove> getPopulationToMove() {
+		return populationToMove;
+	}
+	
+	public void addPopulationToMove(PlanetI to, int amount, Owner owner) {
+		boolean wasSet = false;
+		for (PopulationToMove populationToMove : populationToMove) {
+			// if already ships was sent and ships which was send are same as I want send so join
+			if (populationToMove.getTo().getId() == to.getId() && populationToMove.getOwner().getTeam() == owner.getTeam()) {
+				populationToMove.setAmount(populationToMove.getAmount() + amount);
+				wasSet = true;
+				break;
+			}
+		}
+		
+		if (!wasSet) {
+			this.populationToMove.add(new PopulationToMove(to, amount, owner));
+		}
+	}
+
+	public void setPopulationToMove(int populationToMove) {
+
+	}
+
+	public Color getOwnerColor() {
+		return owner.getColor();
+	}
+
+	public int getOwnerTeam() {
+		return owner.getTeam();
+	}
+
+	public Owner getOwner() {
+		return owner.clone();
+	}
+	
+	public int getPopulationMaxConst() {
+		return populationMaxConst;
+	}
+
+	public void setPopulationMaxConst(int populationMaxConst) {
+		this.populationMaxConst = populationMaxConst;
+	}
+
+	public int getPopulationSmallMaxConst() {
+		return populationSmallMaxConst;
+	}
+
+	public void setPopulationSmallMaxConst(int populationSmallMaxConst) {
+		this.populationSmallMaxConst = populationSmallMaxConst;
+	}
+
+	@Override
+	public void setStartLine(GameContainer gc, int delta, Vector2f startLine) throws SlickException {
+		// TODO Auto-generated method stub
+		
+	}
 }

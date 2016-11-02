@@ -60,11 +60,19 @@ public interface PlanetI {
 	
 	public int getPopulationMaxTimer();
 	
-	public void setPopulationSpeedUp(float speedUp);
+	public void setPopulationSpeedUp(int speedUp);
 	
-	public float getPopulationSpeedUp();
+	public int getPopulationSpeedUp();
 	
 	public Planet clone();
 	
 	public boolean checkCollision(Vector2f mousePosition);
+	
+	public int getPopulationMaxConst();
+	
+	public void setPopulationMaxConst(int populationMaxConst);
+	
+	public int getPopulationSmallMaxConst();
+
+	public void setPopulationSmallMaxConst(int populationSmallMaxConst);
 }

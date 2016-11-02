@@ -3,8 +3,6 @@ package designer.game.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -20,6 +18,8 @@ import game.object.Planet;
 import game.object.PlanetI;
 import game.utils.KeyWord;
 import game.utils.ResourceStore;
+
+
 
 public class DesignerCore extends BasicGame {
 
@@ -43,7 +43,6 @@ public class DesignerCore extends BasicGame {
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		ResourceStore.init();
-		
 	}
 
 	@Override
@@ -66,6 +65,7 @@ public class DesignerCore extends BasicGame {
 					p.setOwner(new Owner(Color.gray, 0));
 					planets.add(p);
 					setPropertiesWindow(p);
+					planetSelected = planets.size() - 1;
 				} else {
 					tmpMousePosition.set(gc.getInput().getAbsoluteMouseX(), gc.getInput().getAbsoluteMouseY());
 				}
@@ -134,14 +134,19 @@ public class DesignerCore extends BasicGame {
 		if (planetMove) {
 			p.setPosition(new Vector2f(mousePosition));
 		}
-		pw.positionX.setText(Integer.toString(p.getPositionX()));
-		pw.positionY.setText(Integer.toString(p.getPositionY()));
-		pw.planetId.setText(Integer.toString(p.getId()));
+		pw.textFieldX.setText(Integer.toString(p.getPositionX()));
+		pw.textFieldY.setText(Integer.toString(p.getPositionY()));
+		pw.textFieldId.setText(Integer.toString(p.getId()));
+		pw.textFieldRadius.setText(Integer.toString(p.getRadius()));
+		pw.textFieldSpeedUp.setText(Integer.toString(p.getPopulationSpeedUp()));
+		pw.textFieldPopulation.setText(Integer.toString(p.getPopulation()));
+		pw.textFieldPopulationMax.setText(Integer.toString(p.getPopulationMaxConst()));
+		pw.textFieldPopulationSmallMax.setText(Integer.toString(p.getPopulationSmallMaxConst()));
 	}
 	
 	
 	public void updatePlanet(int id, KeyWord key, int value) {
-		if (planetIndex != -1) {
+		if (planetSelected != -1) {
 			for (PlanetI planet : planets) {
 				if (planet.getId() == id) {
 					if (key == KeyWord.POSITION_X) {
@@ -152,6 +157,18 @@ public class DesignerCore extends BasicGame {
 					}
 					if (key == KeyWord.SIZE) {
 						planet.setRadius(value);
+					}
+					if (key == KeyWord.SPEED_UP) {
+						planet.setPopulationSpeedUp(value);
+					}
+					if (key == KeyWord.POPULATION_SMALL_MAX) {
+						planet.setPopulationSmallMaxConst(value);
+					}
+					if (key == KeyWord.POPULATION_MAX) {
+						planet.setPopulationMaxConst(value);
+					}
+					if (key == KeyWord.POPULATION) {
+						planet.setPopulation(value);
 					}
 					break;
 				}
