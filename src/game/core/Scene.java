@@ -13,7 +13,7 @@ import org.newdawn.slick.geom.Vector2f;
 import game.enemy.UI;
 import game.object.Explosion;
 import game.object.Owner;
-import game.object.PlanetI;
+import game.object.Planet;
 import game.object.PopulationToMove;
 import game.object.Ship;
 import game.utils.GamePosition;
@@ -26,13 +26,13 @@ public class Scene {
 	private Image bcg;
 	private int levelId;
 	
-	List<PlanetI> planets = new ArrayList<PlanetI>();
+	List<Planet> planets = new ArrayList<Planet>();
 	List<Ship> ships = new ArrayList<Ship>();
 	List<Ship> shipsToRemove = new ArrayList<Ship>();
 	List<Explosion> explosions = new ArrayList<Explosion>();
 	List<UI> uis = new ArrayList<UI>();
 	
-	private PlanetI startPlanet;
+	private Planet startPlanet;
 	private Vector2f mousePosition = new Vector2f();
 	private boolean mousePress = false;
 	private int gameStateTimer = 0;
@@ -50,7 +50,7 @@ public class Scene {
 
 	public void update(GameContainer gc, int delta) throws SlickException {
 		mousePosition.set(gc.getInput().getAbsoluteMouseX(), gc.getInput().getAbsoluteMouseY());
-		for (PlanetI planet : planets) {
+		for (Planet planet : planets) {
 			planet.update(gc, delta);	
 			
 			// add ships to travel
@@ -121,7 +121,7 @@ public class Scene {
 		
 		// mouse action
 		if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			for (PlanetI planet : planets) {
+			for (Planet planet : planets) {
 				// select from planet
 				if (planet.checkCollision(mousePosition) && !mousePress && planet.getOwnerTeam() == playerId) {
 //				if (planet.checkCollision(mousePosition) && !mousePress) {
@@ -136,7 +136,7 @@ public class Scene {
 		} else {
 			if (mousePress) {
 				mousePress = false;
-				for (PlanetI planet : planets) {
+				for (Planet planet : planets) {
 					if (planet.checkCollision(mousePosition)) {
 						// if planet from was selected
 						if (startPlanet != null && startPlanet.getId() != planet.getId()) {
@@ -182,7 +182,7 @@ public class Scene {
 	// check if player win
 	private boolean checkVictory() {
 		boolean victory = false;
-		for (PlanetI planet : planets) {
+		for (Planet planet : planets) {
 			if (planet.getOwnerTeam() == playerId) {
 				victory = true;
 			} else if (planet.getOwnerTeam() != 0) {	// check against gray - neutral
@@ -207,7 +207,7 @@ public class Scene {
 	// check if player lost
 	private boolean checkLose() {
 		boolean lostGame = false;
-		for (PlanetI planet : planets) {
+		for (Planet planet : planets) {
 			if (planet.getOwnerTeam() == playerId) {
 				lostGame = false;
 				break;
@@ -238,7 +238,7 @@ public class Scene {
 			g.drawImage(bcg, 0, 0, 1600, 1226, 0, 0, 1600, 1226);
 		}
 		
-		for (PlanetI planet : planets) {
+		for (Planet planet : planets) {
 			planet.render(gc, g);
 		}
 		
@@ -303,7 +303,7 @@ public class Scene {
 	}
 
 	
-	public void setPlanets(List<PlanetI> planets) {
+	public void setPlanets(List<Planet> planets) {
 		this.planets = planets;
 	}
 	

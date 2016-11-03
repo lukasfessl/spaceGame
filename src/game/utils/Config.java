@@ -14,6 +14,8 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import game.store.SettingsDataStore;
+
 public class Config {
 
 	
@@ -43,7 +45,7 @@ public class Config {
 			f.mkdirs();
 		}
 		
-		DataStore ds = new DataStore();
+		SettingsDataStore ds = new SettingsDataStore();
 		ds.put("fullscreen", fullscreen);
 		ds.put("sound", sound);
 		ds.put("unlockedLevel", unlockedLevel);
@@ -64,7 +66,7 @@ public class Config {
 			try {
 				FileInputStream fis = new FileInputStream(f);
 				ObjectInputStream ois = new ObjectInputStream(fis);
-				DataStore ds = (DataStore)ois.readObject();
+				SettingsDataStore ds = (SettingsDataStore)ois.readObject();
 				fullscreen = Boolean.parseBoolean(ds.get("fullscreen"));
 				sound = Boolean.parseBoolean(ds.get("sound"));
 				String color[] = ds.get("playerColor").split(",");

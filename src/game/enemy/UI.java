@@ -3,7 +3,7 @@ package game.enemy;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.object.PlanetI;
+import game.object.Planet;
 import game.utils.Config;
 
 public class UI {
@@ -12,8 +12,8 @@ public class UI {
 	
 	private float smallestDistance = -1;
 	private int currentTimeWait = 0;  
-	PlanetI planetFrom = null;
-	PlanetI planetTo = null;
+	Planet planetFrom = null;
+	Planet planetTo = null;
 	
 	List<CommandToAttack> cta = new ArrayList<CommandToAttack>();
 	
@@ -23,7 +23,7 @@ public class UI {
 	
 	
 	
-	public void update(List<PlanetI> planets) {
+	public void update(List<Planet> planets) {
 
 		if (!cta.isEmpty() && currentTimeWait > cta.get(0).getTimeWait()) {
 			cta.get(0).getPlanetFrom().addPopulationToMove(cta.get(0).getPlanetTo(), (int)(cta.get(0).getPlanetFrom().getPopulation()/2), planets.get(cta.get(0).getPlanetFrom().getId()).getOwner());
@@ -35,11 +35,11 @@ public class UI {
 
 		if (cta.isEmpty()) {
 		
-			for(PlanetI planet : planets) {
+			for(Planet planet : planets) {
 				if (planet.getOwnerTeam() == playerId) {
 					
 					planetFrom = planet;
-					for(PlanetI planetEnemy : planets) {
+					for(Planet planetEnemy : planets) {
 						if (planetEnemy.getOwnerTeam() != playerId) {
 							// defaultne se nastavi prvni nepratelskou planeta
 							if (smallestDistance == -1) {
@@ -99,8 +99,8 @@ public class UI {
 				}
 			}
 		
-//		for(PlanetI planet : planets) {
-//			for(PlanetI planetx : planets) {
+//		for(Planet planet : planets) {
+//			for(Planet planetx : planets) {
 //				
 //				if (planet.getOwnerTeam() != planetx.getOwnerTeam() && planet.getOwnerTeam() == playerId) {
 //				
@@ -109,17 +109,17 @@ public class UI {
 //					} else {
 //						if (planet.getPosition().distance(planetx.getPosition()) < smallestDistance) {
 //							smallestDistance = planet.getPosition().distance(planetx.getPosition());
-//							planetIdFrom = planet.getId();
-//							planetIdTo = planetx.getId();
+//							PlanetdFrom = planet.getId();
+//							PlanetdTo = planetx.getId();
 //						}
 //					}
 //				}
 //			}
 //		}	
 //		
-//		if (planets.get(planetIdFrom).getPopulation() > planets.get(planetIdFrom).getPopulationMax()/4) {
-//			planets.get(planetIdFrom).addPopulationToMove(planets.get(planetIdTo), planets.get(planetIdFrom).getPopulation()/4);
-//			planets.get(planetIdFrom).setPopulation(planets.get(planetIdFrom).getPopulation() - planets.get(planetIdFrom).getPopulation()/4);
+//		if (planets.get(PlanetdFrom).getPopulation() > planets.get(PlanetdFrom).getPopulationMax()/4) {
+//			planets.get(PlanetdFrom).addPopulationToMove(planets.get(PlanetdTo), planets.get(PlanetdFrom).getPopulation()/4);
+//			planets.get(PlanetdFrom).setPopulation(planets.get(PlanetdFrom).getPopulation() - planets.get(PlanetdFrom).getPopulation()/4);
 //		}
 		}
 	}

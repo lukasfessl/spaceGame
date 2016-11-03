@@ -9,20 +9,20 @@ import org.newdawn.slick.Color;
 import game.core.Scene;
 import game.enemy.UI;
 import game.object.Owner;
-import game.object.PlanetI;
+import game.object.Planet;
 import game.utils.Config;
 import game.utils.ResourceStore;
 
 public abstract class AbstractLevel {
 
 	protected HashMap<Color, Owner> players;
-	protected List<PlanetI> planets;
+	protected List<Planet> planets;
 	protected List<UI> uis;
 	protected Scene scene;
 
 	public AbstractLevel() {
 		players = new HashMap<Color, Owner>();
-		planets = new ArrayList<PlanetI>();
+		planets = new ArrayList<Planet>();
 		uis = new ArrayList<UI>();
 		initPlayers();
 	}
@@ -50,8 +50,8 @@ public abstract class AbstractLevel {
 		scene = new Scene(-1);
 		scene.setUser(players.get(Config.playerColor));	// user
 		
-		List<PlanetI> p = new ArrayList<>();
-		for (PlanetI pl : planets) {
+		List<Planet> p = new ArrayList<>();
+		for (Planet pl : planets) {
 			p.add(pl.clone());
 		}
 		scene.setPlanets(p);

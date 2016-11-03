@@ -13,7 +13,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 import game.utils.ResourceStore;
 
-public class Planet implements PlanetI{
+public class Planet implements PlanetI {
 	
 	protected int populationCurrenTimer;
 	protected int populationMaxTimer;
@@ -193,7 +193,7 @@ public class Planet implements PlanetI{
 		return populationToMove;
 	}
 	
-	public void addPopulationToMove(PlanetI to, int amount, Owner owner) {
+	public void addPopulationToMove(Planet to, int amount, Owner owner) {
 		boolean wasSet = false;
 		for (PopulationToMove populationToMove : populationToMove) {
 			// if already ships was sent and ships which was send are same as I want send so join
@@ -244,6 +244,15 @@ public class Planet implements PlanetI{
 	@Override
 	public void setStartLine(GameContainer gc, int delta, Vector2f startLine) throws SlickException {
 		// TODO Auto-generated method stub
-		
 	}
+
+	public int getPlanetType() {
+		return planetType;
+	}
+
+	public void setPlanetType(int planetType) {
+		this.planetType = planetType;
+	}
+	
+	
 }

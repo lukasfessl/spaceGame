@@ -44,7 +44,7 @@ public interface PlanetI {
 
 	public List<PopulationToMove> getPopulationToMove();
 	
-	public void addPopulationToMove(PlanetI to, int amount, Owner owner);
+	public void addPopulationToMove(Planet to, int amount, Owner owner);
 	
 	public void setOwner(Owner owner);
 	
@@ -75,4 +75,8 @@ public interface PlanetI {
 	public int getPopulationSmallMaxConst();
 
 	public void setPopulationSmallMaxConst(int populationSmallMaxConst);
+	
+	public int getPlanetType();
+
+	public void setPlanetType(int planetType);
 }

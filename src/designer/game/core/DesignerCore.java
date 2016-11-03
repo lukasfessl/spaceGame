@@ -1,12 +1,16 @@
 package designer.game.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
@@ -15,7 +19,11 @@ import org.newdawn.slick.geom.Vector2f;
 import designer.game.gui.PropertiesWindow;
 import game.object.Owner;
 import game.object.Planet;
-import game.object.PlanetI;
+import game.object.Planet;
+import game.store.LevelDataStore;
+import game.store.PlanetDataStore;
+import game.store.PlanetMapper;
+import game.utils.Config;
 import game.utils.KeyWord;
 import game.utils.ResourceStore;
 
@@ -23,26 +31,31 @@ import game.utils.ResourceStore;
 
 public class DesignerCore extends BasicGame {
 
-	PropertiesWindow pw;
-	List<PlanetI> planets;
-	Vector2f mousePosition;
-	Vector2f tmpMousePosition;
-	boolean mousePress = false;
-	int planetIndex = -1;
-	int planetSelected = -1;
-	boolean planetMove = false;
+	private PropertiesWindow pw;
+	private List<Planet> planets;
+	private	Image bcg;
+	private int bcgIndex;
+	private Vector2f mousePosition;
+	private Vector2f tmpMousePosition;
+	private boolean mousePress = false;
+	private int Planetndex = -1;
+	private int planetSelected = -1;
+	private boolean planetMove = false;
 	
 	public DesignerCore(String title) {
 		super(title);
-		planets = new ArrayList<PlanetI>();
-		pw = new PropertiesWindow(this);
-		mousePosition = new Vector2f();
-		tmpMousePosition = new Vector2f();
+		this.planets = new ArrayList<Planet>();
+		this.pw = new PropertiesWindow(this);
+		this.mousePosition = new Vector2f();
+		this.tmpMousePosition = new Vector2f();
 	}
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		ResourceStore.init();
+		this.bcgIndex = 0;
+		this.bcg = ResourceStore.backgrounds.get(bcgIndex);
+		pw.textFieldBackground.setText(Integer.toString(bcgIndex));
 	}
 
 	@Override
@@ -52,15 +65,15 @@ public class DesignerCore extends BasicGame {
 		//LEFT BUTTON - add planet
 		if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 			if (!mousePress) {
-				planetIndex = -1;
+				Planetndex = -1;
 				for (int i = 0; i < planets.size(); i++) {
 					if (planets.get(i).checkCollision(mousePosition)) {
-						planetIndex = i;
+						Planetndex = i;
 						planetSelected = i;
 					}
 				}
 				
-				if (planetIndex == -1) {
+				if (Planetndex == -1) {
 					Planet p = new Planet(gc.getInput().getMouseX(), gc.getInput().getMouseY(), 70, planets.size(), 1, 100, 20);
 					p.setOwner(new Owner(Color.gray, 0));
 					planets.add(p);
@@ -76,13 +89,13 @@ public class DesignerCore extends BasicGame {
 			if (mousePress) {
 				mousePress = false;
 				planetMove = false;
-				planetIndex = -1;
+				Planetndex = -1;
 			}
 		}
 		
 		// move with planet
-		if (planetIndex > -1 && mousePress && planetIndex < planets.size()) {
-			PlanetI p = planets.get(planetIndex);
+		if (Planetndex > -1 && mousePress && Planetndex < planets.size()) {
+			Planet p = planets.get(Planetndex);
 			if (tmpMousePosition.distance(mousePosition) > 10 && planetMove == false) {
 				planetMove = true;
 			}
@@ -116,21 +129,25 @@ public class DesignerCore extends BasicGame {
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
+		if (bcg != null) {
+			g.drawImage(bcg, 0, 0, 1600, 1226, 0, 0, 1600, 1226);
+		}
+		
 		if (planets.size() > 0) {
-			for (PlanetI planet : planets) {
+			for (Planet planet : planets) {
 				planet.renderMore(gc, g, true);
 			}
 		}
 		
 		if (planetSelected != -1 && planetSelected < planets.size()) {
-			PlanetI p = planets.get(planetSelected);
+			Planet p = planets.get(planetSelected);
 			g.setColor(Color.red);
 			g.fill(new Circle(p.getPositionX(), p.getPositionY(), 5));
 		}
 	}
 	
 	
-	private void setPropertiesWindow(PlanetI p) {
+	private void setPropertiesWindow(Planet p) {
 		if (planetMove) {
 			p.setPosition(new Vector2f(mousePosition));
 		}
@@ -142,12 +159,13 @@ public class DesignerCore extends BasicGame {
 		pw.textFieldPopulation.setText(Integer.toString(p.getPopulation()));
 		pw.textFieldPopulationMax.setText(Integer.toString(p.getPopulationMaxConst()));
 		pw.textFieldPopulationSmallMax.setText(Integer.toString(p.getPopulationSmallMaxConst()));
+		pw.textFieldType.setText(Integer.toString(p.getPlanetType()));
 	}
 	
 	
 	public void updatePlanet(int id, KeyWord key, int value) {
 		if (planetSelected != -1) {
-			for (PlanetI planet : planets) {
+			for (Planet planet : planets) {
 				if (planet.getId() == id) {
 					if (key == KeyWord.POSITION_X) {
 						planet.setPosition(new Vector2f(value, planet.getPositionY()));
@@ -157,6 +175,9 @@ public class DesignerCore extends BasicGame {
 					}
 					if (key == KeyWord.SIZE) {
 						planet.setRadius(value);
+					}
+					if (key == KeyWord.TYPE) {
+						planet.setPlanetType(value);
 					}
 					if (key == KeyWord.SPEED_UP) {
 						planet.setPopulationSpeedUp(value);
@@ -174,5 +195,25 @@ public class DesignerCore extends BasicGame {
 				}
 			}
 		}
+	}
+	
+	public void update(KeyWord key, int value) {
+		if (key == KeyWord.BACKGROUND &&  ResourceStore.backgrounds.size() > value) {
+			this.bcg = ResourceStore.backgrounds.get(value);
+			this.bcgIndex = value;
+		}
+	}
+	
+	public LevelDataStore getLevelDataStore() {
+		LevelDataStore lds = new LevelDataStore();
+		lds.setPlanets(PlanetMapper.planetToPlanetDataStore(this.planets));
+		lds.setBcgIndex(this.bcgIndex);
+		return lds;
+	}
+	
+	public void loadLevelDataStore(LevelDataStore lds) {
+		this.planets = PlanetMapper.planetDataStoreToPlanet(lds.getPlanets());
+		this.update(KeyWord.BACKGROUND, lds.getBcgIndex());
+		pw.textFieldBackground.setText(Integer.toString(lds.getBcgIndex()));
 	}
 }

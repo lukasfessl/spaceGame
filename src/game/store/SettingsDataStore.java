@@ -1,15 +1,15 @@
-package game.utils;
+package game.store;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class DataStore implements Serializable{
+public class SettingsDataStore implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	private HashMap<String, String> data;
 	
-	public DataStore() {
+	public SettingsDataStore() {
 		this.data = new HashMap<String, String>();
 	}
 	

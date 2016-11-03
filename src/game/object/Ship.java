@@ -12,8 +12,8 @@ import game.utils.ResourceStore;
 
 public class Ship {
 
-	private PlanetI from;
-	private PlanetI to;
+	private Planet from;
+	private Planet to;
 	private Vector2f currentPossition;
 	private Owner owner;
 	
@@ -24,7 +24,7 @@ public class Ship {
 	private Image image;
 	private int size = 16;
 
-	public Ship(PlanetI from, PlanetI to, Owner owner) {
+	public Ship(Planet from, Planet to, Owner owner) {
 		this.from = from;
 		this.to = to;
 		this.owner = owner;
@@ -93,19 +93,19 @@ public class Ship {
 		this.currentStep = currentStep;
 	}
 
-	public PlanetI getFrom() {
+	public Planet getFrom() {
 		return from;
 	}
 
-	public void setFrom(PlanetI from) {
+	public void setFrom(Planet from) {
 		this.from = from;
 	}
 
-	public PlanetI getTo() {
+	public Planet getTo() {
 		return to;
 	}
 
-	public void setTo(PlanetI to) {
+	public void setTo(Planet to) {
 		this.to = to;
 	}
 

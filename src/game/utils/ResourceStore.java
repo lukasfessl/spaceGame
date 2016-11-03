@@ -28,6 +28,7 @@ public class ResourceStore {
 			planets = new Image("resource/planets3.png");
 			ship = new Image("resource/ship.png");
 			backgrounds.add(new Image("resource/bcg01.png"));
+			backgrounds.add(new Image("resource/bcg01.jpg"));
 			items.put("check" ,new Image("resource/check.png"));
 			items.put("lock", new Image("resource/lock.png"));
 			progress = 50;

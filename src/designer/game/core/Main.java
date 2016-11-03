@@ -5,6 +5,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
 import game.utils.Config;
+import game.utils.ResourceStore;
 
 public class Main {
 	
@@ -20,9 +21,7 @@ public class Main {
 			game.setAlwaysRender(true);
 			game.setDisplayMode(Config.windowWidth, Config.windowHeight, false);
 			game.setVSync(true);
-			game.setIcon("resource/icon.png");
-			
-			
+			game.setIcon("resource/icon.png");		
 			game.setFullscreen(Config.fullscreen);
 			game.start();
 		} catch (SlickException e) {

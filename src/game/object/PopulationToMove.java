@@ -2,7 +2,7 @@ package game.object;
 
 public class PopulationToMove {
 	
-	private PlanetI to;
+	private Planet to;
 	
 	private int amount;
 	
@@ -10,7 +10,7 @@ public class PopulationToMove {
 	
 	private Owner owner;
 	
-	public PopulationToMove(PlanetI to, int amount, Owner owner) {
+	public PopulationToMove(Planet to, int amount, Owner owner) {
 		this.to = to;
 		this.amount = amount;
 		timeToSent = 0;
@@ -25,11 +25,11 @@ public class PopulationToMove {
 		this.owner = owner;
 	}
 
-	public PlanetI getTo() {
+	public Planet getTo() {
 		return to;
 	}
 
-	public void setTo(PlanetI to) {
+	public void setTo(Planet to) {
 		this.to = to;
 	}
 

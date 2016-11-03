@@ -1,34 +1,34 @@
 package game.enemy;
 
-import game.object.PlanetI;
+import game.object.Planet;
 
 public class CommandToAttack {
 
-	private PlanetI planetFrom;
+	private Planet planetFrom;
 	
-	private PlanetI planetTo;
+	private Planet planetTo;
 	
 	private int timeWait;
 	
-	public CommandToAttack(PlanetI planetFrom, PlanetI planetTo, int timeWait) {
+	public CommandToAttack(Planet planetFrom, Planet planetTo, int timeWait) {
 		this.planetFrom = planetFrom;
 		this.planetTo = planetTo;
 		this.timeWait = timeWait;
 	}
 
-	public PlanetI getPlanetFrom() {
+	public Planet getPlanetFrom() {
 		return planetFrom;
 	}
 
-	public void setPlanetFrom(PlanetI planetFrom) {
+	public void setPlanetFrom(Planet planetFrom) {
 		this.planetFrom = planetFrom;
 	}
 
-	public PlanetI getPlanetTo() {
+	public Planet getPlanetTo() {
 		return planetTo;
 	}
 
-	public void setPlanetTo(PlanetI planetTo) {
+	public void setPlanetTo(Planet planetTo) {
 		this.planetTo = planetTo;
 	}
 
