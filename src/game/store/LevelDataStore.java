@@ -9,11 +9,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name="data")
 @XmlAccessorType (XmlAccessType.FIELD)
 public class LevelDataStore implements Serializable {
 
-	@XmlElement(name = "planets")
+	@XmlElement(name="planet")
 	private List<PlanetDataStore> planets;
 	private int bcgIndex;
 	

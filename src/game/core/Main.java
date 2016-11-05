@@ -14,7 +14,7 @@ public class Main {
 		System.setProperty("org.lwjgl.librarypath", new File("libs/natives").getAbsolutePath());
 	
 		try {
-			AppGameContainer game = new AppGameContainer(new GameCore("Space ship game 0.2"));
+			AppGameContainer game = new AppGameContainer(new GameCore("Space ship game 0.5.0"));
 			game.setTargetFrameRate(60);
 			game.setMaximumLogicUpdateInterval(60);
 			game.setAlwaysRender(true);

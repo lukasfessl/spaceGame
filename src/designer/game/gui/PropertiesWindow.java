@@ -1,6 +1,8 @@
 package designer.game.gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -9,12 +11,14 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.io.File;
 
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -25,12 +29,16 @@ import javax.xml.bind.Unmarshaller;
 
 import designer.game.core.DesignerCore;
 import game.store.LevelDataStore;
+import game.utils.Config;
 import game.utils.KeyWord;
+import java.awt.Font;
 
 public class PropertiesWindow extends JFrame {
 
 	private DesignerCore dc;
 	private File pathToLastDir;
+	private File lastSavedFile;
+	private JLabel labelNameContent;
 	
 	private JPanel contentPane;
 	public JTextField textFieldId;
@@ -43,6 +51,8 @@ public class PropertiesWindow extends JFrame {
 	public JTextField textFieldPopulationMax;
 	public JTextField textFieldType;
 	public JTextField textFieldBackground;
+	
+	public JComboBox comboBox;
 	
 	/**
 	 * Create the frame.
@@ -72,6 +82,15 @@ public class PropertiesWindow extends JFrame {
 				save();
 			}
 		});
+		
+		JMenuItem mntmNov = new JMenuItem("Nový");
+		mntmNov.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				newMaps();
+			}
+		});
+		mnNewMenu.add(mntmNov);
 		mnNewMenu.add(menuItemSave);
 		
 		JMenuItem menuItemLoad = new JMenuItem("Načíst");
@@ -81,6 +100,15 @@ public class PropertiesWindow extends JFrame {
 				load();
 			}
 		});
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Uložit jako");
+		mntmNewMenuItem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				saveAs();
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
 		mnNewMenu.add(menuItemLoad);
 		
 		
@@ -94,17 +122,17 @@ public class PropertiesWindow extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		
 		JLabel labelId = new JLabel("Id:");
-		labelId.setBounds(10, 12, 46, 14);
+		labelId.setBounds(10, 47, 46, 14);
 		panel.add(labelId);
 		
 		textFieldId = new JTextField();
 		textFieldId.setColumns(10);
-		textFieldId.setBounds(76, 9, 86, 20);
+		textFieldId.setBounds(76, 44, 86, 20);
 		panel.add(textFieldId);
 		
 		textFieldY = new JTextField();
 		textFieldY.setColumns(10);
-		textFieldY.setBounds(76, 68, 86, 20);
+		textFieldY.setBounds(76, 103, 86, 20);
 		textFieldY.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke){
 				updatePlanet(textFieldId.getText(), KeyWord.POSITION_Y, textFieldY.getText());
@@ -119,7 +147,7 @@ public class PropertiesWindow extends JFrame {
 		
 		textFieldX = new JTextField();
 		textFieldX.setColumns(10);
-		textFieldX.setBounds(76, 40, 86, 20);
+		textFieldX.setBounds(76, 75, 86, 20);
 		textFieldX.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke){
 				updatePlanet(textFieldId.getText(), KeyWord.POSITION_X, textFieldX.getText());
@@ -133,18 +161,18 @@ public class PropertiesWindow extends JFrame {
 		});
 		
 		JLabel labelX = new JLabel("X:");
-		labelX.setBounds(10, 40, 46, 14);
+		labelX.setBounds(10, 75, 46, 14);
 		panel.add(labelX);
 		panel.add(textFieldX);
 		
 		JLabel labelY = new JLabel("Y:");
-		labelY.setBounds(10, 71, 46, 14);
+		labelY.setBounds(10, 106, 46, 14);
 		panel.add(labelY);
 		panel.add(textFieldY);
 		
 		textFieldPopulation = new JTextField();
 		textFieldPopulation.setColumns(10);
-		textFieldPopulation.setBounds(76, 130, 86, 20);
+		textFieldPopulation.setBounds(76, 165, 86, 20);
 		textFieldPopulation.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke){
 				updatePlanet(textFieldId.getText(), KeyWord.POPULATION, textFieldPopulation.getText());
@@ -159,7 +187,7 @@ public class PropertiesWindow extends JFrame {
 		
 		textFieldRadius = new JTextField();
 		textFieldRadius.setColumns(10);
-		textFieldRadius.setBounds(76, 99, 86, 20);
+		textFieldRadius.setBounds(76, 134, 86, 20);
 		textFieldRadius.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke){
 				updatePlanet(textFieldId.getText(), KeyWord.SIZE, textFieldRadius.getText());
@@ -173,22 +201,22 @@ public class PropertiesWindow extends JFrame {
 		});
 		
 		JLabel labelRadius = new JLabel("Velikost");
-		labelRadius.setBounds(10, 102, 46, 14);
+		labelRadius.setBounds(10, 137, 46, 14);
 		panel.add(labelRadius);
 		panel.add(textFieldRadius);
 		
 		JLabel labelPopulation = new JLabel("Populace:");
-		labelPopulation.setBounds(10, 133, 56, 14);
+		labelPopulation.setBounds(10, 168, 56, 14);
 		panel.add(labelPopulation);
 		panel.add(textFieldPopulation);
 		
 		JLabel labelSpeedUp = new JLabel("Přirůstek:");
-		labelSpeedUp.setBounds(10, 164, 56, 14);
+		labelSpeedUp.setBounds(10, 199, 56, 14);
 		panel.add(labelSpeedUp);
 		
 		textFieldSpeedUp = new JTextField();
 		textFieldSpeedUp.setColumns(10);
-		textFieldSpeedUp.setBounds(76, 161, 86, 20);
+		textFieldSpeedUp.setBounds(76, 196, 86, 20);
 		textFieldSpeedUp.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke){
 				updatePlanet(textFieldId.getText(), KeyWord.SPEED_UP, textFieldSpeedUp.getText());
@@ -204,7 +232,7 @@ public class PropertiesWindow extends JFrame {
 		
 		textFieldPopulationSmallMax = new JTextField();
 		textFieldPopulationSmallMax.setColumns(10);
-		textFieldPopulationSmallMax.setBounds(76, 192, 86, 20);
+		textFieldPopulationSmallMax.setBounds(76, 227, 86, 20);
 		textFieldPopulationSmallMax.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke){
 				updatePlanet(textFieldId.getText(), KeyWord.POPULATION_SMALL_MAX, textFieldPopulationSmallMax.getText());
@@ -218,13 +246,13 @@ public class PropertiesWindow extends JFrame {
 		});
 		
 		JLabel labelPopulationSmallMax = new JLabel("Poč. max. p.");
-		labelPopulationSmallMax.setBounds(10, 198, 86, 14);
+		labelPopulationSmallMax.setBounds(10, 233, 86, 14);
 		panel.add(labelPopulationSmallMax);
 		panel.add(textFieldPopulationSmallMax);
 		
 		textFieldPopulationMax = new JTextField();
 		textFieldPopulationMax.setColumns(10);
-		textFieldPopulationMax.setBounds(76, 226, 86, 20);
+		textFieldPopulationMax.setBounds(76, 261, 86, 20);
 		textFieldPopulationMax.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke){
 				updatePlanet(textFieldId.getText(), KeyWord.POPULATION_MAX, textFieldPopulationMax.getText());
@@ -238,22 +266,22 @@ public class PropertiesWindow extends JFrame {
 		});
 		
 		JLabel labelPopulationMax = new JLabel("Max pop.");
-		labelPopulationMax.setBounds(10, 229, 56, 14);
+		labelPopulationMax.setBounds(10, 264, 56, 14);
 		panel.add(labelPopulationMax);
 		panel.add(textFieldPopulationMax);
 		
 		JLabel labelType = new JLabel("Typ:");
-		labelType.setBounds(10, 260, 46, 14);
+		labelType.setBounds(10, 295, 46, 14);
 		panel.add(labelType);
 		
 		textFieldType = new JTextField();
-		textFieldType.setBounds(76, 257, 86, 20);
+		textFieldType.setBounds(76, 292, 86, 20);
 		panel.add(textFieldType);
 		textFieldType.setColumns(10);
 		
 		textFieldBackground = new JTextField();
 		textFieldBackground.setText("0");
-		textFieldBackground.setBounds(76, 360, 86, 20);
+		textFieldBackground.setBounds(76, 395, 86, 20);
 		panel.add(textFieldBackground);
 		textFieldBackground.setColumns(10);
 		textFieldBackground.addKeyListener(new KeyAdapter() {
@@ -269,8 +297,36 @@ public class PropertiesWindow extends JFrame {
 		});		
 		
 		JLabel labelBackground = new JLabel("Pozadí:");
-		labelBackground.setBounds(10, 363, 46, 14);
+		labelBackground.setBounds(10, 398, 46, 14);
 		panel.add(labelBackground);
+		
+		
+		String []items = new String[]{"Neutrální", "Hráč 1", "Hráč 2", "Hráč 3", "Hráč 4", "Hráč 5"};
+		comboBox = new JComboBox(items);
+		comboBox.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() ==  ItemEvent.SELECTED) {
+					updatePlanet(textFieldId.getText(), KeyWord.PLAYER, Integer.toString(comboBox.getSelectedIndex()));
+				}
+			}
+		});
+		comboBox.setBounds(76, 323, 86, 20);
+		panel.add(comboBox);
+		
+		JLabel labelPlayer = new JLabel("Hráč:");
+		labelPlayer.setBounds(10, 326, 46, 14);
+		panel.add(labelPlayer);
+		
+		JLabel labelName = new JLabel("Název:");
+		labelName.setFont(new Font("Tahoma", Font.BOLD, 13));
+		labelName.setBounds(10, 11, 46, 14);
+		panel.add(labelName);
+		
+		labelNameContent = new JLabel("-");
+		labelNameContent.setToolTipText("");
+		labelNameContent.setBounds(76, 12, 46, 14);
+		panel.add(labelNameContent);
 		textFieldType.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke){
 				updatePlanet(textFieldId.getText(), KeyWord.TYPE, textFieldType.getText());
@@ -286,9 +342,9 @@ public class PropertiesWindow extends JFrame {
 		panel.updateUI();
 	}
 	
-	private void updatePlanet(String Planetd, KeyWord key, String value) {
+	private void updatePlanet(String planetId, KeyWord key, String value) {
 		int tmpVal = Integer.parseInt(value) < 0 ? 0 : Integer.parseInt(value);
-		dc.updatePlanet(Integer.parseInt(Planetd), key, tmpVal);
+		dc.updatePlanet(Integer.parseInt(planetId), key, tmpVal);
 	}
 	
 	private void update(KeyWord key, String value) {
@@ -296,7 +352,7 @@ public class PropertiesWindow extends JFrame {
 		dc.update(key, tmpVal);
 	}
 	
-	public void clearData() {
+	public void clearPlanetData() {
 		textFieldId.setText("");
 		textFieldX.setText("");
 		textFieldY.setText("");
@@ -308,23 +364,62 @@ public class PropertiesWindow extends JFrame {
 		textFieldType.setText("");
 	}
 	
+	
+	//------------- action menu -------------------
+	
+	private void newMaps() {
+		dc.clearData();
+		this.clearPlanetData();
+		this.lastSavedFile = null;
+		this.labelNameContent.setText("-");
+		this.textFieldBackground.setText(Integer.toString(0));
+		this.comboBox.setSelectedIndex(0);
+	}
+	
 	private void save() {
+		if (lastSavedFile != null) {
+			processFile(lastSavedFile);
+		} else {
+			JFileChooser chooser = new JFileChooser(pathToLastDir);
+			int retrival = chooser.showSaveDialog(null);
+			if (retrival == JFileChooser.APPROVE_OPTION) {
+	        	pathToLastDir = chooser.getCurrentDirectory();
+	        	File file = new File(chooser.getSelectedFile().getAbsolutePath());
+	        	processFile(file);
+				lastSavedFile = file;
+				labelNameContent.setText(chooser.getSelectedFile().getName());
+		    } else {
+		    }
+		}
+	}
+	
+	private void saveAs() {
 		JFileChooser chooser = new JFileChooser(pathToLastDir);
 		int retrival = chooser.showSaveDialog(null);
 		if (retrival == JFileChooser.APPROVE_OPTION) {
         	pathToLastDir = chooser.getCurrentDirectory();
-        	try {
-				JAXBContext jaxbContext = JAXBContext.newInstance(LevelDataStore.class);
-				Marshaller marshaller = jaxbContext.createMarshaller();
-				// output pretty printed
-				marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-				marshaller.marshal(dc.getLevelDataStore(), new File(chooser.getSelectedFile().getAbsolutePath()));
-				marshaller.marshal(dc.getLevelDataStore(), System.out);
-			} catch (JAXBException e) {
-				e.printStackTrace();
-			}
+        	File file = new File(chooser.getSelectedFile().getAbsolutePath());
+        	processFile(file);
+			lastSavedFile = file;
+			labelNameContent.setText(chooser.getSelectedFile().getName());
 	    } else {
 	    }
+	}
+	
+	// transform to xml and save
+	private void processFile(File file) {
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(LevelDataStore.class);
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			// output pretty printed
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			marshaller.marshal(dc.getLevelDataStore(), file);
+			marshaller.marshal(dc.getLevelDataStore(), System.out);
+			JOptionPane.showMessageDialog(null, "Level byl uložen", "Success", JOptionPane.PLAIN_MESSAGE);
+		} catch (JAXBException e) {
+			JOptionPane.showMessageDialog(null, "Level se nepodařilo uložit", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 	
 	private void load() {
@@ -333,14 +428,20 @@ public class PropertiesWindow extends JFrame {
 		if (retrival == JFileChooser.APPROVE_OPTION) {
         	pathToLastDir = chooser.getCurrentDirectory();
         	try {
+        		File file = new File(chooser.getSelectedFile().getAbsolutePath());
         		JAXBContext jc = JAXBContext.newInstance(LevelDataStore.class);
                 Unmarshaller unmarshaller = jc.createUnmarshaller();
-                LevelDataStore lds = (LevelDataStore) unmarshaller.unmarshal(new File(chooser.getSelectedFile().getAbsolutePath()));
+                LevelDataStore lds = (LevelDataStore) unmarshaller.unmarshal(file);
+                lastSavedFile = file;
                 dc.loadLevelDataStore(lds);
+                labelNameContent.setText(chooser.getSelectedFile().getName());
 			} catch (JAXBException e) {
 				e.printStackTrace();
 			}
 	    } else {
 	    }
 	}
+	
+	
+	
 }

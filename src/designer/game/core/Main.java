@@ -15,7 +15,7 @@ public class Main {
 		System.setProperty("org.lwjgl.librarypath", new File("libs/natives").getAbsolutePath());
 	
 		try {
-			AppGameContainer game = new AppGameContainer(new DesignerCore("Designer 0.0.1"));
+			AppGameContainer game = new AppGameContainer(new DesignerCore("Designer 0.3.1"));
 			game.setTargetFrameRate(60);
 			game.setMaximumLogicUpdateInterval(60);
 			game.setAlwaysRender(true);

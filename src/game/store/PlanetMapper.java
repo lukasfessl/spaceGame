@@ -2,11 +2,13 @@ package game.store;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.newdawn.slick.Color;
 
 import game.object.Owner;
 import game.object.Planet;
+import game.utils.ResourceStore;
 
 public class PlanetMapper {
 
@@ -26,7 +28,7 @@ public class PlanetMapper {
 			planetDataStore.setPopulationSmallMaxConst(planet.getPopulationSmallMaxConst());
 			
 			planetDataStore.setPlanetType(planet.getPlanetType());
-			planetDataStore.setOwner(-1); // TODO:
+			planetDataStore.setOwner(planet.getOwnerTeam());
 			
 			pds.add(planetDataStore);
 		}
@@ -42,7 +44,13 @@ public class PlanetMapper {
 					ds.getPopulationMaxConst(), ds.getPopulationSmallMaxConst());
 			p.setPopulationSpeedUp(ds.getSpeedUp());
 			p.setPopulation(ds.getPopulation());
-			p.setOwner(new Owner(Color.gray, 0));
+			for (Entry<Color, Owner> entry : ResourceStore.players.entrySet()) {
+				Owner owner = entry.getValue();
+				if (owner.getTeam() == ds.getOwner()) {
+					p.setOwner(ResourceStore.players.get(owner.getColor()));
+					break;
+				}
+			}
 			planets.add(p);
 		}
 	

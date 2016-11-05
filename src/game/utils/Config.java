@@ -14,6 +14,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import game.object.Owner;
 import game.store.SettingsDataStore;
 
 public class Config {
@@ -33,9 +34,9 @@ public class Config {
 	public static boolean fullscreen = false;
 	
 	public static boolean sound = true;
-	
+		
 	public static Color playerColor = Color.blue;
-	
+
 	public static String alphabet = "abcdefghijklmnopqrstuvwxyzěščřžýáíéúůňďťABCDEFGHIJKLMNOPQRSTUVWXYZĚŠČŘŽÝÁÍÉ1234567890";
 
 	
@@ -78,5 +79,4 @@ public class Config {
 			}
 		}
 	}
-	
 }

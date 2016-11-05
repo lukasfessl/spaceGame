@@ -31,7 +31,7 @@ public class QuickGame extends AbstractLevel {
 						int randPosY = (row * rowHeight) + (planetRadius + 15) + (Config.rs.nextInt(rowHeight - (2 * planetRadius) - 15*2));
 
 						planets.add(new Planet(randPosX, randPosY, planetRadius, planets.size(), planetType, 100, 10));
-						planets.get(planets.size()-1).setOwner(players.get(Color.gray));
+						planets.get(planets.size()-1).setOwner(ResourceStore.players.get(Color.gray));
 						planets.get(planets.size()-1).setPopulationSpeedUp(Config.rs.nextInt(2)+1);
 						planets.get(planets.size()-1).setPopulation(15);
 					}
@@ -54,13 +54,13 @@ public class QuickGame extends AbstractLevel {
 			}
 		}
 
-		uis.add(new UI(players.get(Color.green).getTeam()));
+		uis.add(new UI(ResourceStore.players.get(Color.green).getTeam()));
 		planets.get(uiPlanet).setPopulation(30);
-		planets.get(uiPlanet).setOwner(players.get(Color.green));
+		planets.get(uiPlanet).setOwner(ResourceStore.players.get(Color.green));
 		
-		scene.setUser(players.get(Config.playerColor));	// user
+		scene.setUser(ResourceStore.players.get(Config.playerColor));	// user
 		planets.get(playerPlanet).setPopulation(30);
-		planets.get(playerPlanet).setOwner(players.get(Config.playerColor));
+		planets.get(playerPlanet).setOwner(ResourceStore.players.get(Config.playerColor));
 		
 		scene.setPlanets(planets);
 		scene.setUIs(uis);
