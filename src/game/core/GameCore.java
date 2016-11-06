@@ -1,6 +1,4 @@
 package game.core;
-import java.util.Timer;
-
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -9,14 +7,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import game.level.AbstractLevel;
-import game.level.Level1;
-import game.level.Level2;
-import game.level.Level3;
-import game.level.Level4;
-import game.level.Level5;
-import game.level.Level6;
-import game.level.Level7;
-import game.level.Level8;
+import game.level.Level;
 import game.level.QuickGame;
 import game.level.TestLevel;
 import game.level.TestLevel2;
@@ -25,6 +16,11 @@ import game.utils.GamePosition;
 import game.utils.ResourceStore;
 import game.utils.ScreenManager;
 
+/**
+ * 
+ * @author Lukas Fessl
+ *
+ */
 public class GameCore extends BasicGame {
 	
 	Scene scene;	
@@ -34,7 +30,6 @@ public class GameCore extends BasicGame {
 
 	public GameCore(String title) {
 		super(title);
-		
 	}
 
 	@Override
@@ -43,8 +38,8 @@ public class GameCore extends BasicGame {
 		pause = false;
 		ScreenManager.gamePosition = GamePosition.MENU_MAIN;
 		menu = new Menu(gc);
-//		Config.gamePosition = GamePosition.GAME;
-//		scene = new Level6(-1).createLevel();
+//		ScreenManager.gamePosition = GamePosition.GAME;
+//		scene = new Level().createLevel1(-1).getScene();
 	}
 	
 
@@ -179,21 +174,21 @@ public class GameCore extends BasicGame {
 	
 	private void initScene() {
 		if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_1) {
-			scene = new Level1(1).getScene();
+			scene = new Level().createLevel1(1).getScene();
 		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_2) {
-			scene = new Level2(2).getScene();
-		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_3) {
-			scene = new Level3(3).getScene();
+			scene = new Level().createLevel2(2).getScene();
+		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_3) {;
+			scene = new Level().createLevel3(3).getScene();
 		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_4) {
-			scene = new Level4(4).getScene();
+			scene = new Level().createLevel4(4).getScene();
 		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_5) {
-			scene = new Level5(5).getScene();
+			scene = new Level().createLevel5(5).getScene();
 		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_6) {
-			scene = new Level6(6).getScene();
+			scene = new Level().createLevel6(6).getScene();
 		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_7) {
-			scene = new Level7(7).getScene();
+			scene = new Level().createLevel7(7).getScene();
 		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_8) {
-			scene = new Level8(8).getScene();
+			scene = new Level().createLevel8(8).getScene();
 		}
 
 		if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_TEST_1) {
@@ -203,15 +198,14 @@ public class GameCore extends BasicGame {
 		}
 		
 		if (ScreenManager.gamePosition == GamePosition.GAME_QUICK) {
-			tmpLevel = new QuickGame(-1);
-			scene = new QuickGame(-1).getScene();
-//			if (tmpLevel == null) {
-//				tmpLevel = new QuickGame(-1);
-//				scene = tmpLevel.cloneScene();
-//			} else {
-//				System.out.println("xx");
-//				scene = tmpLevel.cloneScene();
-//			}
+//			tmpLevel = new QuickGame(-1);
+//			scene = new QuickGame(-1).getScene();
+			if (tmpLevel == null) {
+				tmpLevel = new QuickGame(-1);
+				scene = tmpLevel.cloneScene();
+			} else {
+				scene = tmpLevel.cloneScene();
+			}
 		}
 	}
 	

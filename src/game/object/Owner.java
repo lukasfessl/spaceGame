@@ -2,6 +2,11 @@ package game.object;
 
 import org.newdawn.slick.Color;
 
+/**
+ * 
+ * @author Lukas Fessl
+ *
+ */
 public class Owner {
 
 	private Color color;
@@ -13,6 +18,9 @@ public class Owner {
 		this.team = team;
 	}
 
+	
+	// -- setters and getters
+	
 	public Color getColor() {
 		return color;
 	}

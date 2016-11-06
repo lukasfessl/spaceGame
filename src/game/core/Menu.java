@@ -18,6 +18,11 @@ import game.utils.GamePosition;
 import game.utils.ResourceStore;
 import game.utils.ScreenManager;
 
+/**
+ * 
+ * @author Lukas Fessl
+ *
+ */
 public class Menu {
 
 	// Button dimension

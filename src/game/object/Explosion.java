@@ -7,6 +7,12 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Vector2f;
 
+/**
+ * Draw explosion of ship
+ * 
+ * @author Lukas Fessl
+ *
+ */
 public class Explosion {
 
 	private Vector2f position;
@@ -21,7 +27,6 @@ public class Explosion {
 		readyToDelete = false;
 	}
 
-
 	public void update(GameContainer gc, int delta) {
 		explosionRadius += 0.3;
 		if (explosionRadius > 5) {
@@ -31,8 +36,6 @@ public class Explosion {
 			}
 		}
 	}
-
-	
 
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		g.setLineWidth(10);
@@ -45,6 +48,8 @@ public class Explosion {
 	}
 
 
+	// -- setters and getters
+	
 	public float getExplosionRadius() {
 		return this.explosionRadius;
 	}

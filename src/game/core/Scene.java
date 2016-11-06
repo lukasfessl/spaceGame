@@ -19,6 +19,11 @@ import game.object.Ship;
 import game.utils.GamePosition;
 import game.utils.ScreenManager;
 
+/**
+ * 
+ * @author Lukas Fessl
+ *
+ */
 public class Scene {
 
 	private int playerId = 1;

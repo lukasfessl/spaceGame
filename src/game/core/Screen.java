@@ -1,5 +1,10 @@
 package game.core;
 
+/**
+ * 
+ * @author Lukas Fessl
+ *
+ */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +23,6 @@ public class Screen {
 	}
 	
 	public void update(GameContainer gc, int delta) throws SlickException {
-		
 		for (Button button : buttons) {
 			button.update(gc, delta);
 		}

@@ -1,5 +1,10 @@
 package game.object;
 
+/**
+ * 
+ * @author Lukas Fessl
+ *
+ */
 public class PopulationToMove {
 	
 	private Planet to;
@@ -16,6 +21,9 @@ public class PopulationToMove {
 		timeToSent = 0;
 		this.owner = owner;
 	}
+	
+	
+	// -- setters and getters
 	
 	public Owner getOwner() {
 		return owner;

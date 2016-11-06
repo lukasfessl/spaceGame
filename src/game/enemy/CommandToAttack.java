@@ -2,6 +2,12 @@ package game.enemy;
 
 import game.object.Planet;
 
+/**
+ * Command to attack for UI. 
+ * 
+ * @author Lukas Fessl
+ *
+ */
 public class CommandToAttack {
 
 	private Planet planetFrom;

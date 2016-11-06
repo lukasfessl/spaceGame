@@ -13,6 +13,11 @@ import org.newdawn.slick.geom.Vector2f;
 
 import game.utils.ResourceStore;
 
+/**
+ * 
+ * @author Lukas Fessl
+ *
+ */
 public class Planet implements PlanetI {
 	
 	protected int populationCurrenTimer;
@@ -111,6 +116,32 @@ public class Planet implements PlanetI {
 		}
 	}
 	
+	public boolean checkCollision(Vector2f mousePosition) {
+		if (position.distance(mousePosition) < radius) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void addPopulationToMove(Planet to, int amount, Owner owner) {
+		boolean wasSet = false;
+		for (PopulationToMove populationToMove : populationToMove) {
+			// If already ships was sent and ships which was send are same as I want send so join
+			if (populationToMove.getTo().getId() == to.getId() && populationToMove.getOwner().getTeam() == owner.getTeam()) {
+				populationToMove.setAmount(populationToMove.getAmount() + amount);
+				wasSet = true;
+				break;
+			}
+		}
+		
+		if (!wasSet) {
+			this.populationToMove.add(new PopulationToMove(to, amount, owner));
+		}
+	}
+	
+	
+	// -- setters and getters
+	
 	public int getPopulationMax() {
 		return populationMax;
 	}
@@ -139,14 +170,6 @@ public class Planet implements PlanetI {
 		} else {
 			populationMax = populationMaxConst;
 		}
-	}
-	
-	public boolean checkCollision(Vector2f mousePosition) {
-		if (position.distance(mousePosition) < radius) {
-			return true;
-		}
-		
-		return false;
 	}
 
 	public void setRadius(int radius) {
@@ -192,22 +215,6 @@ public class Planet implements PlanetI {
 	public List<PopulationToMove> getPopulationToMove() {
 		return populationToMove;
 	}
-	
-	public void addPopulationToMove(Planet to, int amount, Owner owner) {
-		boolean wasSet = false;
-		for (PopulationToMove populationToMove : populationToMove) {
-			// if already ships was sent and ships which was send are same as I want send so join
-			if (populationToMove.getTo().getId() == to.getId() && populationToMove.getOwner().getTeam() == owner.getTeam()) {
-				populationToMove.setAmount(populationToMove.getAmount() + amount);
-				wasSet = true;
-				break;
-			}
-		}
-		
-		if (!wasSet) {
-			this.populationToMove.add(new PopulationToMove(to, amount, owner));
-		}
-	}
 
 	public void setPopulationToMove(int populationToMove) {
 
@@ -231,6 +238,7 @@ public class Planet implements PlanetI {
 
 	public void setPopulationMaxConst(int populationMaxConst) {
 		this.populationMaxConst = populationMaxConst;
+		this.populationMax = this.populationMaxConst;
 	}
 
 	public int getPopulationSmallMaxConst() {
@@ -239,6 +247,7 @@ public class Planet implements PlanetI {
 
 	public void setPopulationSmallMaxConst(int populationSmallMaxConst) {
 		this.populationSmallMaxConst = populationSmallMaxConst;
+		this.populationMax = this.populationSmallMaxConst;
 	}
 
 	@Override

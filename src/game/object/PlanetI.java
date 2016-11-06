@@ -8,6 +8,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
+/**
+ * 
+ * @author Lukas Fessl
+ *
+ */
 public interface PlanetI {
 
 	public void render(GameContainer gc, Graphics arg1) throws SlickException;

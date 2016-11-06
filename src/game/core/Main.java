@@ -6,6 +6,11 @@ import org.newdawn.slick.SlickException;
 
 import game.utils.Config;
 
+/**
+ * 
+ * @author Lukas Fessl
+ *
+ */
 public class Main {
 	
 	public static void main(String[] args) {

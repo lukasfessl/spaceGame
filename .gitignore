@@ -1,10 +1,7 @@
 .classpath
-
 .project
-
-game.jar
-
+game
+.jar
 .settings
-
-data
+data/user_settings.conf
 bin

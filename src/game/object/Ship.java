@@ -10,6 +10,11 @@ import org.newdawn.slick.geom.Vector2f;
 import game.utils.Config;
 import game.utils.ResourceStore;
 
+/**
+ * 
+ * @author Lukas Fessl
+ *
+ */
 public class Ship {
 
 	private Planet from;
@@ -62,13 +67,16 @@ public class Ship {
 			g.setColor(owner.getColor());
 		}
 
-		// sometimes is no set center
+		// Sometimes is no set center
 		if (image.getCenterOfRotationX() != 100) {
 			g.drawImage(image, currentPossition.getX() - size / 2, currentPossition.getY() - size / 2, 
 						currentPossition.getX() + size / 2 ,currentPossition.getY() + size / 2 , 0, 0, 200, 200, owner.getColor());
 		}
 	}
 
+	
+	// -- setters and getters
+	
 	public Vector2f getCurrentPossition() {
 		return currentPossition;
 	}

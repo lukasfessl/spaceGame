@@ -18,4 +18,8 @@ public class Util {
 		return Util.compColor(Color.green, Config.playerColor) ? Color.red : Color.green;
 	}
 	
+	public static Color selectUiColor(Color uiColor, Color replacementColor) {
+		return Util.compColor(uiColor, Config.playerColor) ? replacementColor : uiColor;
+	}
+	
 }
