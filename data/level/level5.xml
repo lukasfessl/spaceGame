@@ -113,7 +113,7 @@
         <positionX>1300</positionX>
         <positionY>700</positionY>
         <radius>60</radius>
-        <speedUp>1</speedUp>
+        <speedUp>2</speedUp>
         <population>40</population>
         <populationMaxConst>100</populationMaxConst>
         <populationSmallMaxConst>20</populationSmallMaxConst>
