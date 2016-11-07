@@ -1,7 +1,5 @@
 .classpath
 .project
-game
-.jar
 .settings
 data/user_settings.conf
 bin
