@@ -1,7 +1,5 @@
 package game.helper;
 
-import java.util.ResourceBundle;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 
@@ -9,7 +7,6 @@ import game.core.Screen;
 import game.gui.ActionHandler;
 import game.gui.Button;
 import game.utils.GamePosition;
-import game.utils.ResourceStore;
 import game.utils.ScreenManager;
 
 public class MenuScreen {

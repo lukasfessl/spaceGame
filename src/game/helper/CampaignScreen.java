@@ -6,7 +6,6 @@ import org.newdawn.slick.GameContainer;
 import game.core.Screen;
 import game.gui.ActionHandler;
 import game.gui.Button;
-import game.utils.Config;
 import game.utils.GamePosition;
 import game.utils.ScreenManager;
 

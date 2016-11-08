@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.io.File;
-import java.util.ResourceBundle;
 
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;

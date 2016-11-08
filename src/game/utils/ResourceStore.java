@@ -3,7 +3,6 @@ package game.utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.newdawn.slick.Color;
@@ -12,8 +11,6 @@ import org.newdawn.slick.SlickException;
 
 import game.object.Owner;
 import game.trans.Lang;
-import game.trans.Messages_cs;
-import game.trans.Messages_en;
 
 public class ResourceStore {
 	

@@ -1,6 +1,5 @@
 package game.core;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -60,10 +59,6 @@ public class Menu {
 				0, buttonHeight,
 		};
 		
-		initScreens(gc);
-	}
-	
-	public void initScreens(GameContainer gc) {
 		// MENU MAIN
 		this.screens.put(GamePosition.MENU_MAIN, MenuScreen.init(buttonWidth, buttonHeight, points.clone(), labelMarginLeft, labelMarginTop, buttonColor, gc));
 		// MENU CAMPAIGN SELECT
@@ -76,9 +71,7 @@ public class Menu {
 		SettingsScreen.initSelectedPlayerColor(screens.get(GamePosition.MENU_SETTINGS));
 		// MENU PAUSE - IN GAME
 		this.screens.put(GamePosition.PAUSE, PauseScreen.init(buttonWidth, buttonHeight, points.clone(), labelMarginLeft, labelMarginTop, buttonColor, gc));
-		
 	}
-	
 	
 	public void updateCampaignMenu() {
 		int count = 0;
@@ -99,8 +92,7 @@ public class Menu {
 		}
 	}
 	
-	
-	
+
 	// Menu
 	public void update(GameContainer gc, int delta) throws SlickException {
 		if (gc.getInput().isKeyPressed(Input.KEY_U)) {
@@ -110,7 +102,6 @@ public class Menu {
 				ResourceStore.lang = Lang.CZECH;
 			}
 			ResourceStore.initTranslation();
-//			initScreens(gc);
 		}
 		if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			if (ScreenManager.gamePosition == GamePosition.MENU_SETTINGS || ScreenManager.gamePosition == GamePosition.MENU_CAMPAIGN_SELECT) {

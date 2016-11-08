@@ -2,8 +2,6 @@ package game.utils;
 
 import org.newdawn.slick.Color;
 
-import game.object.Owner;
-
 public class Util {
 
 	public static boolean compColor(Color color1, Color color2) {
