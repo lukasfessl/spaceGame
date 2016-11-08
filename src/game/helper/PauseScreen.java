@@ -17,7 +17,7 @@ public class PauseScreen {
 		
 		Screen screen = new Screen();
 		
-		Button resume = new Button(600, 100, buttonWidth, buttonHeight, points.clone(), "Pokračovat", labelMarginLeft, labelMarginTop);
+		Button resume = new Button(600, 100, buttonWidth, buttonHeight, points.clone(), "continue", labelMarginLeft, labelMarginTop);
 		resume.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		resume.setActionHandler(new ActionHandler() {
 			@Override
@@ -27,7 +27,7 @@ public class PauseScreen {
 		});
 		screen.addButton(resume);	
 		
-		Button restart = new Button(600, 250, buttonWidth, buttonHeight, points.clone(), "Restartovat", labelMarginLeft, labelMarginTop);
+		Button restart = new Button(600, 250, buttonWidth, buttonHeight, points.clone(), "restart", labelMarginLeft, labelMarginTop);
 		restart.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		restart.setActionHandler(new ActionHandler() {
 			@Override
@@ -37,7 +37,7 @@ public class PauseScreen {
 		});
 		screen.addButton(restart);	
 		
-		Button quit = new Button(600, 400, buttonWidth, buttonHeight, points.clone(), "Konec", labelMarginLeft, labelMarginTop);
+		Button quit = new Button(600, 400, buttonWidth, buttonHeight, points.clone(), "quit", labelMarginLeft, labelMarginTop);
 		quit.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		quit.setActionHandler(new ActionHandler() {
 			@Override

@@ -1,5 +1,6 @@
 package game.core;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -13,6 +14,7 @@ import game.helper.MenuScreen;
 import game.helper.PauseScreen;
 import game.helper.QuickGameScreen;
 import game.helper.SettingsScreen;
+import game.trans.Lang;
 import game.utils.Config;
 import game.utils.GamePosition;
 import game.utils.ResourceStore;
@@ -58,6 +60,10 @@ public class Menu {
 				0, buttonHeight,
 		};
 		
+		initScreens(gc);
+	}
+	
+	public void initScreens(GameContainer gc) {
 		// MENU MAIN
 		this.screens.put(GamePosition.MENU_MAIN, MenuScreen.init(buttonWidth, buttonHeight, points.clone(), labelMarginLeft, labelMarginTop, buttonColor, gc));
 		// MENU CAMPAIGN SELECT
@@ -72,7 +78,6 @@ public class Menu {
 		this.screens.put(GamePosition.PAUSE, PauseScreen.init(buttonWidth, buttonHeight, points.clone(), labelMarginLeft, labelMarginTop, buttonColor, gc));
 		
 	}
-	
 	
 	
 	public void updateCampaignMenu() {
@@ -92,13 +97,21 @@ public class Menu {
 			}
 			
 		}
-
 	}
 	
 	
 	
 	// Menu
 	public void update(GameContainer gc, int delta) throws SlickException {
+		if (gc.getInput().isKeyPressed(Input.KEY_U)) {
+			if (ResourceStore.lang == Lang.CZECH) {
+				ResourceStore.lang = Lang.ENGLISH;
+			} else {
+				ResourceStore.lang = Lang.CZECH;
+			}
+			ResourceStore.initTranslation();
+//			initScreens(gc);
+		}
 		if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			if (ScreenManager.gamePosition == GamePosition.MENU_SETTINGS || ScreenManager.gamePosition == GamePosition.MENU_CAMPAIGN_SELECT) {
 				ScreenManager.gamePosition = GamePosition.MENU_MAIN;

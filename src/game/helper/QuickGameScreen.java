@@ -16,7 +16,7 @@ public class QuickGameScreen {
 		
 		Screen screen = new Screen();
 		
-		Button back = new Button(100, 600, buttonWidth, buttonHeight, points.clone(), "Zpět", labelMarginLeft, labelMarginTop);
+		Button back = new Button(100, 600, buttonWidth, buttonHeight, points.clone(), "back", labelMarginLeft, labelMarginTop);
 		back.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		back.setActionHandler(new ActionHandler() {
 			@Override
@@ -27,7 +27,7 @@ public class QuickGameScreen {
 		screen.addButton(back);
 		
 		
-		Button play = new Button(1150, 600, buttonWidth, buttonHeight, points.clone(), "Hrát", labelMarginLeft, labelMarginTop);
+		Button play = new Button(1150, 600, buttonWidth, buttonHeight, points.clone(), "play", labelMarginLeft, labelMarginTop);
 		play.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		play.setActionHandler(new ActionHandler() {
 			@Override

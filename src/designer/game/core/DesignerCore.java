@@ -42,7 +42,6 @@ public class DesignerCore extends BasicGame {
 	public DesignerCore(String title) {
 		super(title);
 		this.planets = new ArrayList<Planet>();
-		this.pw = new PropertiesWindow(this);
 		this.mousePosition = new Vector2f();
 		this.tmpMousePosition = new Vector2f();
 	}
@@ -50,6 +49,7 @@ public class DesignerCore extends BasicGame {
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		ResourceStore.init();
+		this.pw = new PropertiesWindow(this);
 		this.bcgIndex = 0;
 		this.bcg = ResourceStore.backgrounds.get(bcgIndex);
 		pw.textFieldBackground.setText(Integer.toString(bcgIndex));

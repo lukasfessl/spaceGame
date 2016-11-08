@@ -19,11 +19,11 @@ public class SettingsScreen {
 		
 		final Screen screen = new Screen();
 		
-		Button playerColor = new Button(600, 150, buttonWidth, buttonHeight, points.clone(), "Hráč", labelMarginLeft, labelMarginTop);
+		Button playerColor = new Button(600, 150, buttonWidth, buttonHeight, points.clone(), "player", labelMarginLeft, labelMarginTop);
 		playerColor.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		screen.addButton(playerColor);
 
-		Button back = new Button(100, 600, buttonWidth, buttonHeight, points.clone(), "Zpět", labelMarginLeft, labelMarginTop);
+		Button back = new Button(100, 600, buttonWidth, buttonHeight, points.clone(), "back", labelMarginLeft, labelMarginTop);
 		back.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		back.setActionHandler(new ActionHandler() {
 			@Override
@@ -33,7 +33,7 @@ public class SettingsScreen {
 		});
 		screen.addButton(back);
 		
-		Button fullscreen = new Button(600, 300, buttonWidth, buttonHeight, points.clone(), "Celá\nobrazovka", labelMarginLeft, labelMarginTop);
+		Button fullscreen = new Button(600, 300, buttonWidth, buttonHeight, points.clone(), "fullScreen", labelMarginLeft, labelMarginTop);
 		fullscreen.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		fullscreen.setActionHandler(new ActionHandler() {
 			@Override
@@ -50,7 +50,7 @@ public class SettingsScreen {
 		});
 		screen.addButton(fullscreen);
 		
-		Button sound = new Button(600, 450, buttonWidth, buttonHeight, points.clone(), "Zvuk", labelMarginLeft, labelMarginTop);
+		Button sound = new Button(600, 450, buttonWidth, buttonHeight, points.clone(), "sound", labelMarginLeft, labelMarginTop);
 		sound.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		sound.setActionHandler(new ActionHandler() {
 			@Override

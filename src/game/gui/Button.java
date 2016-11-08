@@ -15,6 +15,7 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
 
 import game.utils.Config;
+import game.utils.ResourceStore;
 
 public class Button {
 
@@ -131,7 +132,7 @@ public class Button {
 		}
 		
 		if (this.label != null) {
-			g.drawString(label, button.getX() + labelPosition.getX(), button.getY() + labelPosition.getY());
+			g.drawString(ResourceStore.trans(label), button.getX() + labelPosition.getX(), button.getY() + labelPosition.getY());
 		}
 		
 		g.resetLineWidth();

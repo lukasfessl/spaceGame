@@ -10,14 +10,14 @@ import game.utils.Config;
 import game.utils.GamePosition;
 import game.utils.ScreenManager;
 
-public class CampaignScreen {
+public class CampaignScreen  {
 	
 	public static Screen init(int buttonWidth, int buttonHeight, float points[], int labelMarginLeft, int labelMarginTop, Color 
 			buttonColor[], final GameContainer gc) {
 		
 		Screen screen = new Screen();
 		
-		Button back = new Button(100, 600, buttonWidth, buttonHeight, points.clone(), "Zpět", labelMarginLeft, labelMarginTop);
+		Button back = new Button(100, 600, buttonWidth, buttonHeight, points.clone(), "back", labelMarginLeft, labelMarginTop);
 		back.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		back.setActionHandler(new ActionHandler() {
 			@Override
@@ -27,7 +27,7 @@ public class CampaignScreen {
 		});
 		screen.addButton(back);
 
-		Button mission = new Button(100, 100, buttonWidth, buttonHeight, points.clone(), "Mise 1", labelMarginLeft, labelMarginTop);
+		Button mission = new Button(100, 100, buttonWidth, buttonHeight, points.clone(), "mission1", labelMarginLeft, labelMarginTop);
 		mission.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		mission.setActionHandler(new ActionHandler() {
 			@Override
@@ -38,7 +38,7 @@ public class CampaignScreen {
 		});
 		screen.addButton(mission);	
 		
-		Button mission2 = new Button(250, 100, buttonWidth, buttonHeight, points.clone(), "Mise 2", labelMarginLeft, labelMarginTop);
+		Button mission2 = new Button(250, 100, buttonWidth, buttonHeight, points.clone(), "mission2", labelMarginLeft, labelMarginTop);
 		mission2.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		mission2.setActionHandler(new ActionHandler() {
 			@Override
@@ -49,7 +49,7 @@ public class CampaignScreen {
 		});
 		screen.addButton(mission2);	
 		
-		Button mission3 = new Button(400, 100, buttonWidth, buttonHeight, points.clone(), "Mise 3", labelMarginLeft, labelMarginTop);
+		Button mission3 = new Button(400, 100, buttonWidth, buttonHeight, points.clone(), "mission3", labelMarginLeft, labelMarginTop);
 		mission3.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		mission3.setActionHandler(new ActionHandler() {
 			@Override
@@ -60,7 +60,7 @@ public class CampaignScreen {
 		});
 		screen.addButton(mission3);	
 		
-		Button mission4 = new Button(550, 100, buttonWidth, buttonHeight, points.clone(), "Mise 4", labelMarginLeft, labelMarginTop);
+		Button mission4 = new Button(550, 100, buttonWidth, buttonHeight, points.clone(), "mission4", labelMarginLeft, labelMarginTop);
 		mission4.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		mission4.setActionHandler(new ActionHandler() {
 			@Override
@@ -71,7 +71,7 @@ public class CampaignScreen {
 		});
 		screen.addButton(mission4);
 		
-		Button mission5 = new Button(700, 100, buttonWidth, buttonHeight, points.clone(), "Mise 5", labelMarginLeft, labelMarginTop);
+		Button mission5 = new Button(700, 100, buttonWidth, buttonHeight, points.clone(), "mission5", labelMarginLeft, labelMarginTop);
 		mission5.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		mission5.setActionHandler(new ActionHandler() {
 			@Override
@@ -82,7 +82,7 @@ public class CampaignScreen {
 		});
 		screen.addButton(mission5);
 		
-		Button mission6 = new Button(850, 100, buttonWidth, buttonHeight, points.clone(), "Mise 6", labelMarginLeft, labelMarginTop);
+		Button mission6 = new Button(850, 100, buttonWidth, buttonHeight, points.clone(), "mission6", labelMarginLeft, labelMarginTop);
 		mission6.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		mission6.setActionHandler(new ActionHandler() {
 			@Override
@@ -93,7 +93,7 @@ public class CampaignScreen {
 		});
 		screen.addButton(mission6);
 		
-		Button mission7 = new Button(1000, 100, buttonWidth, buttonHeight, points.clone(), "Mise 7", labelMarginLeft, labelMarginTop);
+		Button mission7 = new Button(1000, 100, buttonWidth, buttonHeight, points.clone(), "mission7", labelMarginLeft, labelMarginTop);
 		mission7.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		mission7.setActionHandler(new ActionHandler() {
 			@Override
@@ -104,7 +104,7 @@ public class CampaignScreen {
 		});
 		screen.addButton(mission7);
 		
-		Button mission8 = new Button(1150, 100, buttonWidth, buttonHeight, points.clone(), "Mise 8", labelMarginLeft, labelMarginTop);
+		Button mission8 = new Button(1150, 100, buttonWidth, buttonHeight, points.clone(), "mission8", labelMarginLeft, labelMarginTop);
 		mission8.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		mission8.setActionHandler(new ActionHandler() {
 			@Override

@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.io.File;
+import java.util.ResourceBundle;
 
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -31,6 +32,7 @@ import javax.xml.bind.Unmarshaller;
 import designer.game.core.DesignerCore;
 import game.store.LevelDataStore;
 import game.utils.KeyWord;
+import game.utils.ResourceStore;
 
 /**
  * 
@@ -63,7 +65,7 @@ public class PropertiesWindow extends JFrame {
 	 */
 	public PropertiesWindow(DesignerCore dc) {
 		this.dc = dc;
-		setTitle("Properties");
+		setTitle(ResourceStore.trans("properties"));
 		setVisible(true);
 
 		init();
@@ -71,15 +73,15 @@ public class PropertiesWindow extends JFrame {
 
 	private void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 250, 495);
+		setBounds(100, 100, 263, 618);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu mnNewMenu = new JMenu("Menu");
+		JMenu mnNewMenu = new JMenu(ResourceStore.trans("designer.menu"));
 		menuBar.add(mnNewMenu);
 
-		JMenuItem menuItemSave = new JMenuItem("Uložit");
+		JMenuItem menuItemSave = new JMenuItem(ResourceStore.trans("designer.save"));
 		menuItemSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -87,7 +89,7 @@ public class PropertiesWindow extends JFrame {
 			}
 		});
 
-		JMenuItem mntmNov = new JMenuItem("Nový");
+		JMenuItem mntmNov = new JMenuItem(ResourceStore.trans("designer.new"));
 		mntmNov.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -97,7 +99,7 @@ public class PropertiesWindow extends JFrame {
 		mnNewMenu.add(mntmNov);
 		mnNewMenu.add(menuItemSave);
 
-		JMenuItem menuItemLoad = new JMenuItem("Načíst");
+		JMenuItem menuItemLoad = new JMenuItem(ResourceStore.trans("designer.load"));
 		menuItemLoad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -105,7 +107,7 @@ public class PropertiesWindow extends JFrame {
 			}
 		});
 
-		JMenuItem mntmNewMenuItem = new JMenuItem("Uložit jako");
+		JMenuItem mntmNewMenuItem = new JMenuItem(ResourceStore.trans("designer.saveAs"));
 		mntmNewMenuItem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -124,18 +126,18 @@ public class PropertiesWindow extends JFrame {
 		panel.setLayout(null);
 		contentPane.add(panel, BorderLayout.CENTER);
 
-		JLabel labelId = new JLabel("Id:");
-		labelId.setBounds(10, 47, 46, 14);
+		JLabel labelId = new JLabel(ResourceStore.trans("designer.id"));
+		labelId.setBounds(10, 42, 219, 14);
 		panel.add(labelId);
 
 		textFieldId = new JTextField();
 		textFieldId.setColumns(10);
-		textFieldId.setBounds(76, 44, 86, 20);
+		textFieldId.setBounds(10, 57, 163, 20);
 		panel.add(textFieldId);
 
 		textFieldY = new JTextField();
 		textFieldY.setColumns(10);
-		textFieldY.setBounds(76, 103, 86, 20);
+		textFieldY.setBounds(10, 147, 163, 20);
 		textFieldY.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke) {
 				updatePlanet(textFieldId.getText(), KeyWord.POSITION_Y, textFieldY.getText());
@@ -150,7 +152,7 @@ public class PropertiesWindow extends JFrame {
 
 		textFieldX = new JTextField();
 		textFieldX.setColumns(10);
-		textFieldX.setBounds(76, 75, 86, 20);
+		textFieldX.setBounds(10, 102, 163, 20);
 		textFieldX.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke) {
 				updatePlanet(textFieldId.getText(), KeyWord.POSITION_X, textFieldX.getText());
@@ -163,19 +165,19 @@ public class PropertiesWindow extends JFrame {
 			}
 		});
 
-		JLabel labelX = new JLabel("X:");
-		labelX.setBounds(10, 75, 46, 14);
+		JLabel labelX = new JLabel(ResourceStore.trans("designer.x"));
+		labelX.setBounds(10, 86, 219, 14);
 		panel.add(labelX);
 		panel.add(textFieldX);
 
-		JLabel labelY = new JLabel("Y:");
-		labelY.setBounds(10, 106, 46, 14);
+		JLabel labelY = new JLabel(ResourceStore.trans("designer.y"));
+		labelY.setBounds(10, 131, 219, 14);
 		panel.add(labelY);
 		panel.add(textFieldY);
 
 		textFieldPopulation = new JTextField();
 		textFieldPopulation.setColumns(10);
-		textFieldPopulation.setBounds(76, 165, 86, 20);
+		textFieldPopulation.setBounds(10, 234, 163, 20);
 		textFieldPopulation.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke) {
 				updatePlanet(textFieldId.getText(), KeyWord.POPULATION, textFieldPopulation.getText());
@@ -191,7 +193,7 @@ public class PropertiesWindow extends JFrame {
 
 		textFieldRadius = new JTextField();
 		textFieldRadius.setColumns(10);
-		textFieldRadius.setBounds(76, 134, 86, 20);
+		textFieldRadius.setBounds(10, 190, 163, 20);
 		textFieldRadius.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke) {
 				updatePlanet(textFieldId.getText(), KeyWord.SIZE, textFieldRadius.getText());
@@ -205,23 +207,23 @@ public class PropertiesWindow extends JFrame {
 			}
 		});
 
-		JLabel labelRadius = new JLabel("Velikost");
-		labelRadius.setBounds(10, 137, 46, 14);
+		JLabel labelRadius = new JLabel(ResourceStore.trans("designer.planetSize"));
+		labelRadius.setBounds(10, 175, 219, 14);
 		panel.add(labelRadius);
 		panel.add(textFieldRadius);
 
-		JLabel labelPopulation = new JLabel("Populace:");
-		labelPopulation.setBounds(10, 168, 56, 14);
+		JLabel labelPopulation = new JLabel(ResourceStore.trans("designer.startPopulation"));
+		labelPopulation.setBounds(10, 218, 219, 14);
 		panel.add(labelPopulation);
 		panel.add(textFieldPopulation);
 
-		JLabel labelSpeedUp = new JLabel("Přirůstek:");
-		labelSpeedUp.setBounds(10, 199, 56, 14);
+		JLabel labelSpeedUp = new JLabel(ResourceStore.trans("designer.speedUp"));
+		labelSpeedUp.setBounds(10, 263, 219, 14);
 		panel.add(labelSpeedUp);
 
 		textFieldSpeedUp = new JTextField();
 		textFieldSpeedUp.setColumns(10);
-		textFieldSpeedUp.setBounds(76, 196, 86, 20);
+		textFieldSpeedUp.setBounds(10, 279, 163, 20);
 		textFieldSpeedUp.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke) {
 				updatePlanet(textFieldId.getText(), KeyWord.SPEED_UP, textFieldSpeedUp.getText());
@@ -238,7 +240,7 @@ public class PropertiesWindow extends JFrame {
 
 		textFieldPopulationSmallMax = new JTextField();
 		textFieldPopulationSmallMax.setColumns(10);
-		textFieldPopulationSmallMax.setBounds(76, 227, 86, 20);
+		textFieldPopulationSmallMax.setBounds(10, 323, 163, 20);
 		textFieldPopulationSmallMax.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke) {
 				updatePlanet(textFieldId.getText(), KeyWord.POPULATION_SMALL_MAX,
@@ -254,14 +256,14 @@ public class PropertiesWindow extends JFrame {
 			}
 		});
 
-		JLabel labelPopulationSmallMax = new JLabel("Poč. max. p.");
-		labelPopulationSmallMax.setBounds(10, 233, 86, 14);
+		JLabel labelPopulationSmallMax = new JLabel(ResourceStore.trans("designer.startSmallMaxPopulation"));
+		labelPopulationSmallMax.setBounds(10, 307, 219, 14);
 		panel.add(labelPopulationSmallMax);
 		panel.add(textFieldPopulationSmallMax);
 
 		textFieldPopulationMax = new JTextField();
 		textFieldPopulationMax.setColumns(10);
-		textFieldPopulationMax.setBounds(76, 261, 86, 20);
+		textFieldPopulationMax.setBounds(10, 368, 163, 20);
 		textFieldPopulationMax.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke) {
 				updatePlanet(textFieldId.getText(), KeyWord.POPULATION_MAX, textFieldPopulationMax.getText());
@@ -275,23 +277,23 @@ public class PropertiesWindow extends JFrame {
 			}
 		});
 
-		JLabel labelPopulationMax = new JLabel("Max pop.");
-		labelPopulationMax.setBounds(10, 264, 56, 14);
+		JLabel labelPopulationMax = new JLabel(ResourceStore.trans("designer.startMaxPopulation"));
+		labelPopulationMax.setBounds(10, 351, 219, 14);
 		panel.add(labelPopulationMax);
 		panel.add(textFieldPopulationMax);
 
-		JLabel labelType = new JLabel("Typ:");
-		labelType.setBounds(10, 295, 46, 14);
+		JLabel labelType = new JLabel(ResourceStore.trans("designer.planetType"));
+		labelType.setBounds(10, 396, 219, 14);
 		panel.add(labelType);
 
 		textFieldType = new JTextField();
-		textFieldType.setBounds(76, 292, 86, 20);
+		textFieldType.setBounds(10, 413, 163, 20);
 		panel.add(textFieldType);
 		textFieldType.setColumns(10);
 
 		textFieldBackground = new JTextField();
 		textFieldBackground.setText("0");
-		textFieldBackground.setBounds(76, 395, 86, 20);
+		textFieldBackground.setBounds(10, 505, 163, 20);
 		panel.add(textFieldBackground);
 		textFieldBackground.setColumns(10);
 		textFieldBackground.addKeyListener(new KeyAdapter() {
@@ -307,11 +309,13 @@ public class PropertiesWindow extends JFrame {
 			}
 		});
 
-		JLabel labelBackground = new JLabel("Pozadí:");
-		labelBackground.setBounds(10, 398, 46, 14);
+		JLabel labelBackground = new JLabel(ResourceStore.trans("designer.background"));
+		labelBackground.setBounds(10, 490, 219, 14);
 		panel.add(labelBackground);
 
-		String[] items = new String[] { "Neutrální", "Hráč 1", "Hráč 2", "Hráč 3", "Hráč 4", "Hráč 5" };
+		String[] items = new String[] {ResourceStore.trans("designer.player0"), ResourceStore.trans("designer.player1"),
+				ResourceStore.trans("designer.player2"), ResourceStore.trans("designer.player3"),
+				ResourceStore.trans("designer.player4"), ResourceStore.trans("designer.player5")};
 		comboBox = new JComboBox(items);
 		comboBox.addItemListener(new ItemListener() {
 			@Override
@@ -321,21 +325,20 @@ public class PropertiesWindow extends JFrame {
 				}
 			}
 		});
-		comboBox.setBounds(76, 323, 86, 20);
+		comboBox.setBounds(10, 459, 163, 20);
 		panel.add(comboBox);
 
-		JLabel labelPlayer = new JLabel("Hráč:");
-		labelPlayer.setBounds(10, 326, 46, 14);
+		JLabel labelPlayer = new JLabel(ResourceStore.trans("designer.player"));
+		labelPlayer.setBounds(10, 444, 219, 14);
 		panel.add(labelPlayer);
 
-		JLabel labelName = new JLabel("Název:");
+		JLabel labelName = new JLabel(ResourceStore.trans("designer.fileName"));
 		labelName.setFont(new Font("Tahoma", Font.BOLD, 13));
-		labelName.setBounds(10, 11, 46, 14);
+		labelName.setBounds(10, 11, 114, 14);
 		panel.add(labelName);
 
-		labelNameContent = new JLabel("-");
-		labelNameContent.setToolTipText("");
-		labelNameContent.setBounds(76, 12, 138, 14);
+		labelNameContent = new JLabel(ResourceStore.trans("designer.dash"));
+		labelNameContent.setBounds(110, 10, 117, 14);
 		panel.add(labelNameContent);
 		textFieldType.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke) {

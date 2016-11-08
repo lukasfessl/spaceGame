@@ -3,14 +3,22 @@ package game.utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import game.object.Owner;
+import game.trans.Lang;
+import game.trans.Messages_cs;
+import game.trans.Messages_en;
 
 public class ResourceStore {
+	
+	public static int progress = 0;
+	public static boolean loaded = false;
 	
 	public static Image planets;
 	public static ArrayList<int[]> planetPositionOnImage;
@@ -20,11 +28,11 @@ public class ResourceStore {
 	public static List<Image> backgrounds;
 	
 	public static HashMap<String, Image> items;
-
-	public static int progress = 0;
-	public static boolean loaded = false;
 	
 	public static HashMap<Color, Owner> players;
+	
+	public static ResourceBundle tr;
+	public static Lang lang = Lang.ENGLISH;
 	
 	public static void init() {
 		backgrounds = new ArrayList<Image>();
@@ -37,6 +45,8 @@ public class ResourceStore {
 			backgrounds.add(new Image("resource/bcg01.jpg"));
 			items.put("check" ,new Image("resource/check.png"));
 			items.put("lock", new Image("resource/lock.png"));
+			initTranslation();
+			
 			progress = 50;
 
 			planetPositionOnImage = new ArrayList<int[]>();
@@ -73,6 +83,22 @@ public class ResourceStore {
 			loaded = true;
 		} catch (SlickException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static void initTranslation() {
+		if (lang == Lang.CZECH) {
+			tr = ResourceBundle.getBundle("game.trans.Messages_cs");
+		} else if (lang == Lang.ENGLISH) {
+			tr = ResourceBundle.getBundle("game.trans.Messages_en");
+		}		
+	}
+	
+	public static String trans(String key) {
+		try {
+			return tr.getString(key);
+		} catch (Exception e) {
+			return key;
 		}
 	}
 
