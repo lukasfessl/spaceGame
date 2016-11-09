@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.geom.Vector2f;
 
 import game.enemy.UI;
@@ -16,7 +17,9 @@ import game.object.Owner;
 import game.object.Planet;
 import game.object.PopulationToMove;
 import game.object.Ship;
+import game.utils.Config;
 import game.utils.GamePosition;
+import game.utils.ResourceStore;
 import game.utils.ScreenManager;
 
 /**
@@ -299,11 +302,15 @@ public class Scene {
 		// victory message
 		if (win || lose) {
 			g.setColor(player.getColor());
-			String state = "Vítezství";
+			String state = ResourceStore.trans("victory");
 			if (lose) {
-				state = "Prohrál jsi";
+				state = ResourceStore.trans("lost");
 			}
-			g.drawString(state, 600, 350);
+			g.setColor(new Color(0, 0, 0, 0.7f));
+			g.fillRect(0f, Config.windowHeight/3f, Config.windowWidth, Config.windowHeight/3);
+			g.setColor(Color.white);
+			g.setFont(ResourceStore.fonts.get("big"));
+			g.drawString(state, Config.windowWidth/2 - 75, Config.windowHeight/2 - 18);
 		}
 	}
 

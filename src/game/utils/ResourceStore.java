@@ -1,5 +1,6 @@
 package game.utils;
 
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,16 +8,23 @@ import java.util.ResourceBundle;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
 
 import game.object.Owner;
 import game.trans.Lang;
 
 public class ResourceStore {
 	
+	public static String imgPath = "data/resource/";
+	public static String soundPath = "data/sound/";
+	
 	public static int progress = 0;
 	public static boolean loaded = false;
-	
+		
 	public static Image planets;
 	public static ArrayList<int[]> planetPositionOnImage;
 	
@@ -25,6 +33,12 @@ public class ResourceStore {
 	public static List<Image> backgrounds;
 	
 	public static HashMap<String, Image> items;
+	public static HashMap<String, Music> music;
+	public static HashMap<String, Sound> sound;
+	public static Music currentMusic;
+	
+	public static HashMap<String, UnicodeFont> fonts;
+	private static String alphabet = "_abcdefghijklmnopqrstuvwxyzěščřžýáíéúůňďťABCDEFGHIJKLMNOPQRSTUVWXYZĚŠČŘŽÝÁÍÉ1234567890";
 	
 	public static HashMap<Color, Owner> players;
 	
@@ -34,15 +48,20 @@ public class ResourceStore {
 	public static void init() {
 		backgrounds = new ArrayList<Image>();
 		items = new HashMap<String, Image>();
+		music = new HashMap<String, Music>();
+		sound = new HashMap<String, Sound>();
+		fonts = new HashMap<String, UnicodeFont>();
 		players = new HashMap<Color, Owner>();
+		
 		try {
-			planets = new Image("resource/planets3.png");
-			ship = new Image("resource/ship.png");
-			backgrounds.add(new Image("resource/bcg01.png"));
-			backgrounds.add(new Image("resource/bcg01.jpg"));
-			items.put("check" ,new Image("resource/check.png"));
-			items.put("lock", new Image("resource/lock.png"));
+			// images
+			initImage();
+			// sound
+			initSound();
+			// translation
 			initTranslation();
+			// fonts
+			initFont();
 			
 			progress = 50;
 
@@ -83,6 +102,20 @@ public class ResourceStore {
 		}
 	}
 	
+	private static void initImage() throws SlickException {
+		planets = new Image(imgPath + "planets3.png");
+		ship = new Image(imgPath + "ship.png");
+		backgrounds.add(new Image(imgPath + "bcg01.png"));
+		backgrounds.add(new Image(imgPath + "bcg01.jpg"));
+		items.put("check" ,new Image(imgPath + "check.png"));
+		items.put("lock", new Image(imgPath + "lock.png"));
+	}
+	
+	private static void initSound() throws SlickException {
+		sound.put("click", new Sound(soundPath + "click3.wav"));
+		music.put("menuSound", new Music(soundPath + "daybreak.ogg"));
+	}
+	
 	public static void initTranslation() {
 		if (lang == Lang.CZECH) {
 			tr = ResourceBundle.getBundle("game.trans.Messages_cs");
@@ -96,6 +129,25 @@ public class ResourceStore {
 			return tr.getString(key);
 		} catch (Exception e) {
 			return key;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static void initFont() {
+		try {
+			UnicodeFont font = new UnicodeFont(new Font("Calibri", Font.PLAIN, 18));
+			font.getEffects().add(new ColorEffect(java.awt.Color.white));
+			font.addGlyphs(alphabet);
+			font.loadGlyphs();
+			fonts.put("classic", font);
+			
+			UnicodeFont fontB = new UnicodeFont(new Font("Calibri", Font.PLAIN, 36));
+			fontB.getEffects().add(new ColorEffect(java.awt.Color.white));
+			fontB.addGlyphs(alphabet);
+			fontB.loadGlyphs();
+			fonts.put("big", fontB);
+		} catch (SlickException e) {
+			e.printStackTrace();
 		}
 	}
 

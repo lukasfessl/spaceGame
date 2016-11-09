@@ -30,9 +30,6 @@ public class Config {
 	public static boolean sound = true;
 		
 	public static Color playerColor = Color.blue;
-
-	public static String alphabet = "abcdefghijklmnopqrstuvwxyzěščřžýáíéúůňďťABCDEFGHIJKLMNOPQRSTUVWXYZĚŠČŘŽÝÁÍÉ1234567890";
-
 	
 	public static void save() {
 		File f = new File("data");

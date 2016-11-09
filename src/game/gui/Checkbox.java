@@ -1,18 +1,14 @@
 package game.gui;
 
-import java.awt.Font;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
-import game.utils.Config;
+import game.utils.ResourceStore;
 
 public class Checkbox {
 
@@ -22,7 +18,6 @@ public class Checkbox {
 	private String label;
 	private Rectangle mask;
 	private Rectangle mouseMask;
-	private UnicodeFont font;
 	private Color color;
 	
 	public Checkbox(Vector2f position, String label, Color color) {
@@ -33,15 +28,6 @@ public class Checkbox {
 		this.mask = new Rectangle(position.getX(), position.getY(), 25, 25);
 		this.mouseMask = new Rectangle(0, 0, 1, 1);
 		this.mousePress = false;
-		try {
-			font = new UnicodeFont(new Font("Calibri", Font.PLAIN ,  18));
-			font.getEffects().add(new ColorEffect(java.awt.Color.white));
-			font.addGlyphs(Config.alphabet);
-			font.loadGlyphs();
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	public boolean clicked(GameContainer gc) {
@@ -66,7 +52,7 @@ public class Checkbox {
 	}
 	
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		g.setFont(font);
+		g.setFont(ResourceStore.fonts.get("classic"));
 		g.setColor(Color.black);
 		g.fill(new Rectangle(mask.getX(), mask.getY(), mask.getWidth(), mask.getHeight()));
 		g.setColor(Color.white);

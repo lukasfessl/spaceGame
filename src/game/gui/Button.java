@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.geom.Polygon;
@@ -21,6 +22,8 @@ public class Button {
 
 	private Rectangle mask;
 	private Shape button;
+	private Sound clickSound;
+	private Sound hoverSound;
 	
 	private Rectangle mouse;
 	private ActionHandler anctionHandler;
@@ -35,7 +38,6 @@ public class Button {
 	
 	private String label;
 	private Vector2f labelPosition;
-	private UnicodeFont font;
 	
 	public Button(int x, int y, int width, int height, String label, int labelX, int labelY) {
 		this.mask = new Rectangle(x, y, width, height);
@@ -66,14 +68,6 @@ public class Button {
 		this.fill = new Color(0,0,0,0.6f);
 		this.borderSize = 1;
 		this.labelPosition = new Vector2f(labelX, labelY);
-		try {
-			font = new UnicodeFont(new Font("Calibri", Font.PLAIN ,  18));
-			font.getEffects().add(new ColorEffect(java.awt.Color.white));
-			font.addGlyphs(Config.alphabet);
-			font.loadGlyphs();
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	
@@ -84,6 +78,9 @@ public class Button {
 			if (mask.intersects(mouse)) {
 				if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 					if (!clicked) {
+						if (Config.sound && clickSound != null) {
+							clickSound.play();
+						}
 						anctionHandler.onAction();
 						clicked = true;
 					}
@@ -92,6 +89,9 @@ public class Button {
 				}
 				if (!hover) {
 					hover = true;
+					if (Config.sound && hoverSound != null) {
+						hoverSound.play();
+					}
 				}
 			} else {
 				if (hover) {
@@ -103,7 +103,7 @@ public class Button {
 	
 	
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		g.setFont(font);
+		g.setFont(ResourceStore.fonts.get("classic"));
 		g.setLineWidth(borderSize);
 		if (!hover || disabled) {
 			if (fill != null) {
@@ -180,6 +180,14 @@ public class Button {
 	public void setBorder(Color border) {
 		this.border = border;
 	}
+	
+	public Color getBorderHover() {
+		return borderHover;
+	}
+
+	public void setBorderHover(Color borderHover) {
+		this.borderHover = borderHover;
+	}
 
 	public int getBorderSize() {
 		return borderSize;
@@ -195,6 +203,38 @@ public class Button {
 
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
+	}
+
+	public Sound getClickSound() {
+		return clickSound;
+	}
+
+	public void setClickSound(Sound clickSound) {
+		this.clickSound = clickSound;
+	}
+
+	public Sound getHoverSound() {
+		return hoverSound;
+	}
+
+	public void setHoverSound(Sound hoverSound) {
+		this.hoverSound = hoverSound;
+	}
+
+	public boolean isClicked() {
+		return clicked;
+	}
+
+	public void setClicked(boolean clicked) {
+		this.clicked = clicked;
+	}
+
+	public boolean isHover() {
+		return hover;
+	}
+
+	public void setHover(boolean hover) {
+		this.hover = hover;
 	}
 	
 	

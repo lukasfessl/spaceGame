@@ -21,7 +21,7 @@ public class Main {
 			game.setAlwaysRender(true);
 			game.setDisplayMode(Config.windowWidth, Config.windowHeight, false);
 			game.setVSync(true);
-			game.setIcon("resource/icon.png");		
+			game.setIcon(ResourceStore.imgPath + "icon.png");		
 			game.setFullscreen(Config.fullscreen);
 			game.start();
 		} catch (SlickException e) {

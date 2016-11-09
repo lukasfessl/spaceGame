@@ -13,6 +13,8 @@ public class Messages_cs extends ListResourceBundle	 {
 			{"settings", "Nastavení"},
 			{"player", "Hráč"},
 			{"fullScreen", "Celá\nobrazovka"},
+			{"on", "Zapnuto"},
+			{"off", "Vypnuto"},
 			{"sound", "Zvuk"},
 			{"quit", "Konec"},
 			{"restart", "Restartovat"},
@@ -27,6 +29,8 @@ public class Messages_cs extends ListResourceBundle	 {
 			{"mission6", "Mise 6"},
 			{"mission7", "Mise 7"},
 			{"mission8", "Mise 8"},
+			{"victory", "Vítězství"},
+			{"lost", "Prohrál jsi"},
 			// DESIGNER
 			{"desiginer.properties", "Vlastnosti"},
 			{"designer.menu", "Menu"},

@@ -11,6 +11,7 @@ import game.level.Level;
 import game.level.QuickGame;
 import game.level.TestLevel;
 import game.level.TestLevel2;
+import game.trans.Lang;
 import game.utils.Config;
 import game.utils.GamePosition;
 import game.utils.ResourceStore;
@@ -47,6 +48,9 @@ public class GameCore extends BasicGame {
 	public void update(GameContainer gc, int delta) throws SlickException {	
 		// Menu
 		if (ScreenManager.gamePosition.toString().startsWith(GamePosition.MENU.toString())) {
+			// Sound
+			this.playSound("menuSound");
+			
 			menu.update(gc, delta);
 			
 			// When mission was finished was set to tmp finished_level flag
@@ -71,7 +75,8 @@ public class GameCore extends BasicGame {
 		}
 
 		// Game
-		if (ScreenManager.gamePosition.toString().startsWith(GamePosition.GAME.toString())) {
+		if (ScreenManager.gamePosition.toString().startsWith(GamePosition.GAME.toString())) {	
+
 			// New game - create new Level
 			if (scene == null && ScreenManager.tmpPosition == GamePosition.NEW) {
 				ScreenManager.tmpPosition = null;
@@ -135,6 +140,15 @@ public class GameCore extends BasicGame {
 			Config.save();
 			menu.updateCampaignMenu();
 		}
+		
+		if (gc.getInput().isKeyPressed(Input.KEY_U)) {
+			if (ResourceStore.lang == Lang.CZECH) {
+				ResourceStore.lang = Lang.ENGLISH;
+			} else {
+				ResourceStore.lang = Lang.CZECH;
+			}
+			ResourceStore.initTranslation();
+		}
 	}	
 	
 	@Override
@@ -173,6 +187,11 @@ public class GameCore extends BasicGame {
 	
 	
 	private void initScene() {
+		if (ResourceStore.currentMusic != null && Config.sound) {
+			ResourceStore.currentMusic.stop();
+			ResourceStore.currentMusic = null;
+		}
+		
 		if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_1) {
 			scene = new Level().createLevel1(1).getScene();
 		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_2) {
@@ -206,6 +225,20 @@ public class GameCore extends BasicGame {
 			} else {
 				scene = tmpLevel.cloneScene();
 			}
+		}
+	}
+	
+	private void playSound(String path) {
+		
+		if (ResourceStore.currentMusic != null && !Config.sound) {
+			ResourceStore.currentMusic.stop();
+			ResourceStore.currentMusic = null;
+		}
+		
+		if (ResourceStore.currentMusic == null && Config.sound) {
+			ResourceStore.currentMusic = ResourceStore.music.get(path);
+			ResourceStore.currentMusic.loop();
+			ResourceStore.currentMusic.setVolume(0.1f);		
 		}
 	}
 	

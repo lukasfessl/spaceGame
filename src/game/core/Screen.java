@@ -13,6 +13,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import game.gui.Button;
+import game.utils.ResourceStore;
 
 public class Screen {
 
@@ -36,6 +37,9 @@ public class Screen {
 	}
 	
 	public void addButton(Button button) {
+		if (button.getLabel() != null) {
+			button.setClickSound(ResourceStore.sound.get("click"));
+		}
 		this.buttons.add(button);
 	}
 	

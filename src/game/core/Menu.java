@@ -76,7 +76,7 @@ public class Menu {
 	public void updateCampaignMenu() {
 		int count = 0;
 		for (Button button : getScreens().get(GamePosition.MENU_CAMPAIGN_SELECT).getButtons()) {
-			if (button.getLabel().toLowerCase().startsWith("mise")) {
+			if (button.getLabel().toLowerCase().startsWith("mission")) {
 				if (!Config.manualyLevelUnlock) {
 					if (Config.unlockedLevel > count) {
 						button.setDisabled(false);
@@ -95,14 +95,6 @@ public class Menu {
 
 	// Menu
 	public void update(GameContainer gc, int delta) throws SlickException {
-		if (gc.getInput().isKeyPressed(Input.KEY_U)) {
-			if (ResourceStore.lang == Lang.CZECH) {
-				ResourceStore.lang = Lang.ENGLISH;
-			} else {
-				ResourceStore.lang = Lang.CZECH;
-			}
-			ResourceStore.initTranslation();
-		}
 		if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			if (ScreenManager.gamePosition == GamePosition.MENU_SETTINGS || ScreenManager.gamePosition == GamePosition.MENU_CAMPAIGN_SELECT) {
 				ScreenManager.gamePosition = GamePosition.MENU_MAIN;
@@ -120,7 +112,7 @@ public class Menu {
 		if (ScreenManager.gamePosition == GamePosition.MENU_CAMPAIGN_SELECT) {
 			int count = 0;
 			for (Button button : screens.get(GamePosition.MENU_CAMPAIGN_SELECT).getButtons()) {
-				if (button.getLabel().toLowerCase().startsWith("mise")) {
+				if (button.getLabel().toLowerCase().startsWith("mission")) {
 					if (button.isDisabled()) {
 						g.drawImage(ResourceStore.items.get("lock"), button.getMask().getX() + 30 , button.getMask().getY() + 30 , button.getMask().getX() + 91, button.getMask().getY() + 91, 0, 0, 
 								128, 128, Color.red);
@@ -139,12 +131,12 @@ public class Menu {
 			Screen screen =  screens.get(GamePosition.MENU_SETTINGS);
 			for (Button button : screen.getButtons()) {
 				if (button.getLabel() != null) {
-					if (button.getLabel().toLowerCase().equals("celá\nobrazovka")) {
-						g.drawString(Config.fullscreen ? "Zapnuto" : "Vypnuto", button.getMask().getX() + 10, button.getMask().getY() + 80);
+					if (button.getLabel().toLowerCase().equals("fullscreen")) {
+						g.drawString(Config.fullscreen ? ResourceStore.trans("on") : ResourceStore.trans("off"), button.getMask().getX() + 10, button.getMask().getY() + 80);
 					}
 					
-					if (button.getLabel().toLowerCase().equals("zvuk")) {
-						g.drawString(Config.sound ? "Zapnuto" : "Vypnuto", button.getMask().getX() + 10, button.getMask().getY() + 80);
+					if (button.getLabel().toLowerCase().equals("sound")) {
+						g.drawString(Config.sound ? ResourceStore.trans("on") : ResourceStore.trans("off"), button.getMask().getX() + 10, button.getMask().getY() + 80);
 					}
 				}
 			}

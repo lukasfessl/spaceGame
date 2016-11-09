@@ -5,6 +5,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
 import game.utils.Config;
+import game.utils.ResourceStore;
 
 /**
  * 
@@ -19,13 +20,13 @@ public class Main {
 		System.setProperty("org.lwjgl.librarypath", new File("libs/natives").getAbsolutePath());
 	
 		try {
-			AppGameContainer game = new AppGameContainer(new GameCore("Space ship game 0.5.0"));
+			AppGameContainer game = new AppGameContainer(new GameCore("Space ship game 0.5.911"));
 			game.setTargetFrameRate(60);
 			game.setMaximumLogicUpdateInterval(60);
 			game.setAlwaysRender(true);
 			game.setDisplayMode(Config.windowWidth, Config.windowHeight, false);
 			game.setVSync(true);
-			game.setIcon("resource/icon.png");
+			game.setIcon(ResourceStore.imgPath + "icon.png");
 			
 			Config.load();
 			

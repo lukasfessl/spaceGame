@@ -13,6 +13,8 @@ public class Messages_en extends ListResourceBundle	 {
 			{"settings", "Settigns"},
 			{"player", "Player"},
 			{"fullScreen", "Full\nScreen"},
+			{"on", "On"},
+			{"off", "Off"},
 			{"sound", "Sound"},
 			{"quit", "Quit"},
 			{"restart", "Restart"},
@@ -27,6 +29,8 @@ public class Messages_en extends ListResourceBundle	 {
 			{"mission6", "Mission 6"},
 			{"mission7", "Mission 7"},
 			{"mission8", "Mission 8"},
+			{"victory", "Victory"},
+			{"lost", "You lost"},
 			// DESIGNER
 			{"desiginer.properties", "Properties"},
 			{"designer.menu", "Menu"},
