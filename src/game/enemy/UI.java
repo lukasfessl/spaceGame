@@ -68,14 +68,14 @@ public class UI {
 							}
 						// When my planet have small population send backup
 						} else {
-							if (planetEnemy.getPopulation() < 10 && planet.getPosition().distance(planetEnemy.getPosition()) < 300 && planet.getPopulation() > 15) {
+							if (planetEnemy.getPopulation() < 5 && planet.getPosition().distance(planetEnemy.getPosition()) < 300 && planet.getPopulation() > 15) {
 								planetTo = planetEnemy;
 								break;
 							}
 						}
 					}
 					
-					// When planet id selected
+					// When planet is selected
 					if (planetFrom != null && planetTo != null && planetFrom.getId() != planetTo.getId()) {
 						// Attack planet with small population
 						if (planetTo.getPopulation() <= Config.rs.nextInt(10) && planetFrom.getPopulation() > planetFrom.getPopulationMax()/6) {
@@ -83,7 +83,7 @@ public class UI {
 							planetFrom.setPopulation(planetFrom.getPopulation() - (int)(planetFrom.getPopulation()/1.1));
 						// Send standard attack
 						} else {
-							if (planetFrom.getPopulation() > planetFrom.getPopulationMax()/(Config.rs.nextInt(2)+2)) {
+							if (planetFrom.getPopulation() > planetFrom.getPopulationMax()/(Config.rs.nextInt(3)+2)) {
 								// Some time send larger attack
 								if (Config.rs.nextInt(10) == 8) {
 									planetFrom.addPopulationToMove(planetTo, (int)(planetFrom.getPopulation()/1.1), planets.get(planetFrom.getId()).getOwner());
