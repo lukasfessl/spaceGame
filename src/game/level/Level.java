@@ -38,49 +38,49 @@ public class Level {
 	
 	public Level createLevel1(int id) {
 		scene = new Scene(id);
-		this.loadLevel("data/level/level1.xml");
+		this.loadLevel(ResourceStore.levelPath + "level1.xml");
 		initLevelMap();
 		return this;
 	}
 	
 	public Level createLevel2(int id) {
 		scene = new Scene(id);
-		this.loadLevel("data/level/level2.xml");
+		this.loadLevel(ResourceStore.levelPath + "level2.xml");
 		initLevelMap();
 		return this;
 	}
 	
 	public Level createLevel3(int id) {
 		scene = new Scene(id);
-		this.loadLevel("data/level/level3.xml");
+		this.loadLevel(ResourceStore.levelPath + "level3.xml");
 		initLevelMap();
 		return this;
 	}
 	
 	public Level createLevel4(int id) {
 		scene = new Scene(id);
-		this.loadLevel("data/level/level4.xml");
+		this.loadLevel(ResourceStore.levelPath + "level4.xml");
 		initLevelMap();
 		return this;
 	}
 	
 	public Level createLevel5(int id) {
 		scene = new Scene(id);
-		this.loadLevel("data/level/level5.xml");
+		this.loadLevel(ResourceStore.levelPath + "level5.xml");
 		initLevelMap();
 		return this;
 	}
 	
 	public Level createLevel6(int id) {
 		scene = new Scene(id);
-		this.loadLevel("data/level/level6.xml");
+		this.loadLevel(ResourceStore.levelPath + "level6.xml");
 		initLevelMap();
 		return this;
 	}
 	
 	public Level createLevel7(int id) {
 		scene = new Scene(id);
-		this.loadLevel("data/level/level7.xml");
+		this.loadLevel(ResourceStore.levelPath + "level7.xml");
 		initLevelMap();
 		UI ui1 = uis.get(0);
 		ui1.addCommandToAttack(new CommandToAttack(planets.get(planets.size()-1), planets.get(planets.size()-2), 100));
@@ -89,11 +89,11 @@ public class Level {
 	
 	public Level createLevel8(int id) {
 		scene = new Scene(id);
-		this.loadLevel("data/level/level8.xml");
+		this.loadLevel(ResourceStore.levelPath + "level8.xml");
 		initLevelMap();
 		return this;
 	}
-	
+		
 	/**
 	 * Load Level from xml file from giver path
 	 * @param path path to file

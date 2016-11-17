@@ -157,7 +157,7 @@ public class Scene {
 				startPlanet = null;					
 			}
 		}
-		
+
 		for (UI ui: uis) {
 			ui.update(planets);
 		}	

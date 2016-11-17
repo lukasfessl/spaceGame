@@ -16,6 +16,7 @@ import game.utils.Config;
 import game.utils.GamePosition;
 import game.utils.ResourceStore;
 import game.utils.ScreenManager;
+import game.utils.Util;
 
 /**
  * 
@@ -24,11 +25,12 @@ import game.utils.ScreenManager;
  */
 public class GameCore extends BasicGame {
 	
-	Scene scene;	
-	AbstractLevel tmpLevel;	// for quick game
-	Menu menu;
-	boolean pause;
-
+	private Scene scene;	
+	private AbstractLevel tmpLevel;	// for quick game
+	private Menu menu;
+	private boolean pause;
+	private boolean menuSoundPlay;
+	
 	public GameCore(String title) {
 		super(title);
 	}
@@ -37,6 +39,7 @@ public class GameCore extends BasicGame {
 	public void init(GameContainer gc) throws SlickException {
 		ResourceStore.init();
 		pause = false;
+		menuSoundPlay = false;
 		ScreenManager.gamePosition = GamePosition.MENU_MAIN;
 		menu = new Menu(gc);
 //		ScreenManager.gamePosition = GamePosition.GAME;
@@ -49,7 +52,7 @@ public class GameCore extends BasicGame {
 		// Menu
 		if (ScreenManager.gamePosition.toString().startsWith(GamePosition.MENU.toString())) {
 			// Sound
-			this.playSound("menuSound");
+			this.playSound("menuSound", false);
 			
 			menu.update(gc, delta);
 			
@@ -142,10 +145,10 @@ public class GameCore extends BasicGame {
 		}
 		
 		if (gc.getInput().isKeyPressed(Input.KEY_U)) {
-			if (ResourceStore.lang == Lang.CZECH) {
-				ResourceStore.lang = Lang.ENGLISH;
+			if (ResourceStore.languages.get(Config.currentLangIndex) == Lang.CZECH) {
+				Config.currentLangIndex = 0;
 			} else {
-				ResourceStore.lang = Lang.CZECH;
+				Config.currentLangIndex = 1;
 			}
 			ResourceStore.initTranslation();
 		}
@@ -190,8 +193,11 @@ public class GameCore extends BasicGame {
 		if (ResourceStore.currentMusic != null && Config.sound) {
 			ResourceStore.currentMusic.stop();
 			ResourceStore.currentMusic = null;
+			playSound("gameMusic1", true);
+			// All maps have same music, but start position is random
+			ResourceStore.currentMusic.setPosition(Config.rs.nextInt(240));
 		}
-		
+
 		if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_1) {
 			scene = new Level().createLevel1(1).getScene();
 		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_2) {
@@ -208,6 +214,7 @@ public class GameCore extends BasicGame {
 			scene = new Level().createLevel7(7).getScene();
 		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_8) {
 			scene = new Level().createLevel8(8).getScene();
+			playSound("gameMusic2", true); // Custom music
 		}
 
 		if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_TEST_1) {
@@ -228,17 +235,26 @@ public class GameCore extends BasicGame {
 		}
 	}
 	
-	private void playSound(String path) {
+	private void playSound(String name, boolean manualSoundSet) {
 		
-		if (ResourceStore.currentMusic != null && !Config.sound) {
-			ResourceStore.currentMusic.stop();
-			ResourceStore.currentMusic = null;
-		}
-		
-		if (ResourceStore.currentMusic == null && Config.sound) {
-			ResourceStore.currentMusic = ResourceStore.music.get(path);
-			ResourceStore.currentMusic.loop();
-			ResourceStore.currentMusic.setVolume(0.1f);		
+		if (Config.sound) {	
+			if (!this.menuSoundPlay) {
+				this.menuSoundPlay = true;
+				if (ResourceStore.currentMusic != null) {
+					ResourceStore.currentMusic.stop();
+					ResourceStore.currentMusic = null;
+				}
+				ResourceStore.currentMusic = ResourceStore.music.get(name);
+				ResourceStore.currentMusic.loop();
+				ResourceStore.currentMusic.setVolume(0.1f);	
+			}
+			
+			if (manualSoundSet) {
+				ResourceStore.currentMusic = ResourceStore.music.get(name);
+				ResourceStore.currentMusic.loop();
+				ResourceStore.currentMusic.setVolume(0.1f);	
+				this.menuSoundPlay = false;
+			}
 		}
 	}
 	

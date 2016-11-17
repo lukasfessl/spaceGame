@@ -31,6 +31,8 @@ public class Config {
 		
 	public static Color playerColor = Color.blue;
 	
+	public static int currentLangIndex = 0;
+	
 	public static void save() {
 		File f = new File("data");
 		if (!f.exists()) {
@@ -41,6 +43,7 @@ public class Config {
 		ds.put("fullscreen", fullscreen);
 		ds.put("sound", sound);
 		ds.put("unlockedLevel", unlockedLevel);
+		ds.put("currentLangIndex", currentLangIndex);
 		ds.put("playerColor", playerColor.getRed()+","+playerColor.getGreen()+","+playerColor.getBlue());
 		try {
 			FileOutputStream fos = new FileOutputStream("data/user_settings.conf");
@@ -61,6 +64,7 @@ public class Config {
 				SettingsDataStore ds = (SettingsDataStore)ois.readObject();
 				fullscreen = Boolean.parseBoolean(ds.get("fullscreen"));
 				sound = Boolean.parseBoolean(ds.get("sound"));
+				currentLangIndex =  Integer.parseInt(ds.get("currentLangIndex"));
 				String color[] = ds.get("playerColor").split(",");
 				playerColor = new Color(Integer.parseInt(color[0]), Integer.parseInt(color[1]), Integer.parseInt(color[2]));
 				unlockedLevel = Integer.parseInt(ds.get("unlockedLevel"));

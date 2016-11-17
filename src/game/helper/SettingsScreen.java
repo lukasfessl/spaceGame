@@ -1,5 +1,7 @@
 package game.helper;
 
+import java.util.Map.Entry;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -7,8 +9,11 @@ import org.newdawn.slick.SlickException;
 import game.core.Screen;
 import game.gui.ActionHandler;
 import game.gui.Button;
+import game.object.Owner;
+import game.trans.Lang;
 import game.utils.Config;
 import game.utils.GamePosition;
+import game.utils.ResourceStore;
 import game.utils.ScreenManager;
 import game.utils.Util;
 
@@ -19,7 +24,7 @@ public class SettingsScreen {
 		
 		final Screen screen = new Screen();
 		
-		Button playerColor = new Button(600, 150, buttonWidth, buttonHeight, points.clone(), "player", labelMarginLeft, labelMarginTop);
+		Button playerColor = new Button(500, 200, buttonWidth, buttonHeight, points.clone(), "player", labelMarginLeft, labelMarginTop);
 		playerColor.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		screen.addButton(playerColor);
 
@@ -33,7 +38,7 @@ public class SettingsScreen {
 		});
 		screen.addButton(back);
 		
-		Button fullscreen = new Button(600, 300, buttonWidth, buttonHeight, points.clone(), "fullScreen", labelMarginLeft, labelMarginTop);
+		Button fullscreen = new Button(650, 200, buttonWidth, buttonHeight, points.clone(), "fullScreen", labelMarginLeft, labelMarginTop);
 		fullscreen.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		fullscreen.setActionHandler(new ActionHandler() {
 			@Override
@@ -50,7 +55,7 @@ public class SettingsScreen {
 		});
 		screen.addButton(fullscreen);
 		
-		Button sound = new Button(600, 450, buttonWidth, buttonHeight, points.clone(), "sound", labelMarginLeft, labelMarginTop);
+		Button sound = new Button(500, 350, buttonWidth, buttonHeight, points.clone(), "sound", labelMarginLeft, labelMarginTop);
 		sound.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		sound.setActionHandler(new ActionHandler() {
 			@Override
@@ -61,10 +66,27 @@ public class SettingsScreen {
 		});
 		screen.addButton(sound);
 		
+		Button language = new Button(650, 350, buttonWidth, buttonHeight, points.clone(), "language", labelMarginLeft, labelMarginTop);
+		language.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
+		language.setActionHandler(new ActionHandler() {
+			@Override
+			public void onAction() {
+				if (Config.currentLangIndex < ResourceStore.languages.size() - 1) {
+					Config.currentLangIndex++;
+				} else {
+					Config.currentLangIndex = 0;
+				}
+				ResourceStore.initResourceBundle(Config.currentLangIndex);
+				
+				Config.save();
+			}
+		});
+		screen.addButton(language);
+		
 		
 		// COLORS
 		
-		Button playerColorBlue = new Button(620, 185, 20, 20, null, 0, 0);
+		Button playerColorBlue = new Button(520, 235, 20, 20, null, 0, 0);
 		playerColorBlue.setColors(null, Color.blue, null, null);
 		playerColorBlue.setActionHandler(new ActionHandler() {
 			@Override
@@ -76,7 +98,7 @@ public class SettingsScreen {
 		});
 		screen.addButton(playerColorBlue);
 		
-		Button playerColorRed = new Button(650, 185, 20, 20, null, 0, 0);
+		Button playerColorRed = new Button(550, 235, 20, 20, null, 0, 0);
 		playerColorRed.setColors(null, Color.red, null, null);
 		playerColorRed.setActionHandler(new ActionHandler() {
 			@Override
@@ -88,7 +110,7 @@ public class SettingsScreen {
 		});
 		screen.addButton(playerColorRed);
 		
-		Button playerColorGreen = new Button(680, 185, 20, 20, null, 0, 0);
+		Button playerColorGreen = new Button(580, 235, 20, 20, null, 0, 0);
 		playerColorGreen.setColors(null, Color.green, null, null);
 		playerColorGreen.setActionHandler(new ActionHandler() {
 			@Override
@@ -100,7 +122,7 @@ public class SettingsScreen {
 		});
 		screen.addButton(playerColorGreen);
 		
-		Button playerColorYellow = new Button(620, 215, 20, 20, null, 0, 0);
+		Button playerColorYellow = new Button(520, 265, 20, 20, null, 0, 0);
 		playerColorYellow.setColors(null, Color.yellow, null, null);
 		playerColorYellow.setActionHandler(new ActionHandler() {
 			@Override
@@ -112,7 +134,7 @@ public class SettingsScreen {
 		});
 		screen.addButton(playerColorYellow);
 		
-		Button playerColorOrange = new Button(650, 215, 20, 20, null, 0, 0);
+		Button playerColorOrange = new Button(550, 265, 20, 20, null, 0, 0);
 		playerColorOrange.setColors(null, Color.orange, null, null);
 		playerColorOrange.setActionHandler(new ActionHandler() {
 			@Override
@@ -124,7 +146,7 @@ public class SettingsScreen {
 		});
 		screen.addButton(playerColorOrange);
 		
-		Button playerColorPink = new Button(680, 215, 20, 20, null, 0, 0);
+		Button playerColorPink = new Button(580, 265, 20, 20, null, 0, 0);
 		playerColorPink.setColors(null, Color.pink, null, null);
 		playerColorPink.setActionHandler(new ActionHandler() {
 			@Override

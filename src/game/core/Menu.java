@@ -107,7 +107,7 @@ public class Menu {
 	
 	// Menu
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		g.drawImage(ResourceStore.backgrounds.get(0), 0, 0, 1600, 1226, 0, 0, 1600, 1226);
+		g.drawImage(ResourceStore.backgrounds.get(0), 0, 0, 1366, 768, 0, 0, 1366, 768);
 		screens.get(ScreenManager.gamePosition).render(gc, g);
 		if (ScreenManager.gamePosition == GamePosition.MENU_CAMPAIGN_SELECT) {
 			int count = 0;
@@ -137,6 +137,11 @@ public class Menu {
 					
 					if (button.getLabel().toLowerCase().equals("sound")) {
 						g.drawString(Config.sound ? ResourceStore.trans("on") : ResourceStore.trans("off"), button.getMask().getX() + 10, button.getMask().getY() + 80);
+					}
+					
+					if (button.getLabel().toLowerCase().equals("language")) {
+						String lang = ResourceStore.languages.get(Config.currentLangIndex).toString().toLowerCase();
+						g.drawString(ResourceStore.trans(lang), button.getMask().getX() + 10, button.getMask().getY() + 80);
 					}
 				}
 			}

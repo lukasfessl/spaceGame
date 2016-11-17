@@ -1,15 +1,11 @@
 package game.gui;
 
-import java.awt.Font;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
-import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -65,7 +61,7 @@ public class Button {
 		this.disabled = false;
 		this.label = label;
 		this.border = Color.white;
-		this.fill = new Color(0,0,0,0.6f);
+		this.fill = new Color(0,0,0,0.7f);
 		this.borderSize = 1;
 		this.labelPosition = new Vector2f(labelX, labelY);
 	}

@@ -169,8 +169,7 @@ public class DesignerCore extends BasicGame {
 				pw.comboBox.setSelectedIndex(owner.getTeam());
 				break;
 			}
-		}
-		
+		}		
 	}
 	
 	

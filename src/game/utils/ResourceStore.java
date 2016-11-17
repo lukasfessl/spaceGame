@@ -19,8 +19,9 @@ import game.trans.Lang;
 
 public class ResourceStore {
 	
-	public static String imgPath = "data/resource/";
-	public static String soundPath = "data/sound/";
+	public static String imgPath = "resource/img/";
+	public static String soundPath = "resource/sound/";
+	public static String levelPath = "resource/level/";
 	
 	public static int progress = 0;
 	public static boolean loaded = false;
@@ -43,7 +44,8 @@ public class ResourceStore {
 	public static HashMap<Color, Owner> players;
 	
 	public static ResourceBundle tr;
-	public static Lang lang = Lang.ENGLISH;
+	public static List<Lang> languages;
+	public static HashMap<Lang, String> repositories;
 	
 	public static void init() {
 		backgrounds = new ArrayList<Image>();
@@ -52,6 +54,8 @@ public class ResourceStore {
 		sound = new HashMap<String, Sound>();
 		fonts = new HashMap<String, UnicodeFont>();
 		players = new HashMap<Color, Owner>();
+		languages = new ArrayList<Lang>();
+		repositories = new HashMap<Lang, String>();
 		
 		try {
 			// images
@@ -105,23 +109,39 @@ public class ResourceStore {
 	private static void initImage() throws SlickException {
 		planets = new Image(imgPath + "planets3.png");
 		ship = new Image(imgPath + "ship.png");
-		backgrounds.add(new Image(imgPath + "bcg01.png"));
-		backgrounds.add(new Image(imgPath + "bcg01.jpg"));
+		
+		backgrounds.add(new Image(imgPath + "background00.jpg"));
+		backgrounds.add(new Image(imgPath + "background01.jpg"));
+		backgrounds.add(new Image(imgPath + "background02.jpg"));
+		backgrounds.add(new Image(imgPath + "background03.jpg"));
+		backgrounds.add(new Image(imgPath + "background04.jpg"));
+		backgrounds.add(new Image(imgPath + "background05.jpg"));
+		backgrounds.add(new Image(imgPath + "background06.jpg"));
+		backgrounds.add(new Image(imgPath + "background07.jpg"));
+		
 		items.put("check" ,new Image(imgPath + "check.png"));
 		items.put("lock", new Image(imgPath + "lock.png"));
 	}
 	
 	private static void initSound() throws SlickException {
 		sound.put("click", new Sound(soundPath + "click3.wav"));
+		sound.put("explosion", new Sound(soundPath + "explosion1.wav"));
 		music.put("menuSound", new Music(soundPath + "daybreak.ogg"));
+		music.put("gameMusic1", new Music(soundPath + "di-evantile_one-click-blues.ogg"));
+		music.put("gameMusic2", new Music(soundPath + "ironhorse.ogg"));
 	}
 	
 	public static void initTranslation() {
-		if (lang == Lang.CZECH) {
-			tr = ResourceBundle.getBundle("game.trans.Messages_cs");
-		} else if (lang == Lang.ENGLISH) {
-			tr = ResourceBundle.getBundle("game.trans.Messages_en");
-		}		
+		languages.add(Lang.ENGLISH);
+		repositories.put(Lang.ENGLISH, "game.trans.Messages_en");
+		languages.add(Lang.CZECH);
+		repositories.put(Lang.CZECH, "game.trans.Messages_cs");
+
+		initResourceBundle(Config.currentLangIndex);	
+	}
+	
+	public static void initResourceBundle(int currentLangIndex) {
+		tr = ResourceBundle.getBundle(repositories.get(languages.get(currentLangIndex)));	
 	}
 	
 	public static String trans(String key) {
