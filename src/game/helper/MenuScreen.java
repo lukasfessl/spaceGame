@@ -17,7 +17,7 @@ public class MenuScreen {
 		
 		Screen screen = new Screen();
 
-		Button campaign = new Button(500, 200, buttonWidth, buttonHeight, points.clone(), "campaign", labelMarginLeft, labelMarginTop);
+		Button campaign = new Button(548, 250, buttonWidth, buttonHeight, points.clone(), "campaign", labelMarginLeft, labelMarginTop);
 		campaign.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		campaign.setActionHandler(new ActionHandler() {
 			@Override
@@ -29,7 +29,7 @@ public class MenuScreen {
 		
 		
 		
-		Button quickGame = new Button(650, 200, buttonWidth, buttonHeight, points.clone(), "quickGame", labelMarginLeft, labelMarginTop);
+		Button quickGame = new Button(698, 250, buttonWidth, buttonHeight, points.clone(), "quickGame", labelMarginLeft, labelMarginTop);
 		quickGame.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		quickGame.setActionHandler(new ActionHandler() {
 			@Override
@@ -41,7 +41,7 @@ public class MenuScreen {
 		
 		
 		
-		Button settings = new Button(500, 350, buttonWidth, buttonHeight, points.clone(), "settings", labelMarginLeft, labelMarginTop);
+		Button settings = new Button(548, 400, buttonWidth, buttonHeight, points.clone(), "settings", labelMarginLeft, labelMarginTop);
 		settings.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		settings.setActionHandler(new ActionHandler() {
 			@Override
@@ -53,7 +53,7 @@ public class MenuScreen {
 		
 		
 		
-		Button quit = new Button(650, 350, buttonWidth, buttonHeight, points.clone(), "quit", labelMarginLeft, labelMarginTop);
+		Button quit = new Button(698, 400, buttonWidth, buttonHeight, points.clone(), "quit", labelMarginLeft, labelMarginTop);
 		quit.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		quit.setActionHandler(new ActionHandler() {
 			@Override

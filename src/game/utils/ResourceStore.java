@@ -121,6 +121,7 @@ public class ResourceStore {
 		
 		items.put("check" ,new Image(imgPath + "check.png"));
 		items.put("lock", new Image(imgPath + "lock.png"));
+		items.put("logo", new Image(imgPath + "logo.png"));
 	}
 	
 	private static void initSound() throws SlickException {

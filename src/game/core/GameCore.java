@@ -256,6 +256,12 @@ public class GameCore extends BasicGame {
 				this.menuSoundPlay = false;
 			}
 		}
+		
+		if (!Config.sound && ResourceStore.currentMusic != null) {
+			ResourceStore.currentMusic.stop();
+			ResourceStore.currentMusic = null;
+			this.menuSoundPlay = false;
+		}
 	}
 	
 
