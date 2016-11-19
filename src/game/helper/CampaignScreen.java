@@ -114,7 +114,95 @@ public class CampaignScreen  {
 		});
 		screen.addButton(mission8);
 		
-		Button test1 = new Button(1000, 600, buttonWidth, buttonHeight, points.clone(), "Test 1", labelMarginLeft, labelMarginTop);
+		Button mission9 = new Button(100, 350, buttonWidth, buttonHeight, points.clone(), "mission9", labelMarginLeft, labelMarginTop);
+		mission9.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
+		mission9.setActionHandler(new ActionHandler() {
+			@Override
+			public void onAction() {
+				ScreenManager.gamePosition = GamePosition.GAME_LEVEL_9;
+				ScreenManager.tmpPosition = GamePosition.NEW;
+			}
+		});
+		screen.addButton(mission9);
+		
+		Button mission10 = new Button(250, 350, buttonWidth, buttonHeight, points.clone(), "mission10", labelMarginLeft, labelMarginTop);
+		mission10.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
+		mission10.setActionHandler(new ActionHandler() {
+			@Override
+			public void onAction() {
+				ScreenManager.gamePosition = GamePosition.GAME_LEVEL_10;
+				ScreenManager.tmpPosition = GamePosition.NEW;
+			}
+		});
+		screen.addButton(mission10);
+		
+		Button mission11 = new Button(400, 350, buttonWidth, buttonHeight, points.clone(), "mission11", labelMarginLeft, labelMarginTop);
+		mission11.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
+		mission11.setActionHandler(new ActionHandler() {
+			@Override
+			public void onAction() {
+				ScreenManager.gamePosition = GamePosition.GAME_LEVEL_11;
+				ScreenManager.tmpPosition = GamePosition.NEW;
+			}
+		});
+		screen.addButton(mission11);
+		
+		Button mission12 = new Button(550, 350, buttonWidth, buttonHeight, points.clone(), "mission12", labelMarginLeft, labelMarginTop);
+		mission12.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
+		mission12.setActionHandler(new ActionHandler() {
+			@Override
+			public void onAction() {
+				ScreenManager.gamePosition = GamePosition.GAME_LEVEL_12;
+				ScreenManager.tmpPosition = GamePosition.NEW;
+			}
+		});
+		screen.addButton(mission12);
+		
+		Button mission13 = new Button(700, 350, buttonWidth, buttonHeight, points.clone(), "mission13", labelMarginLeft, labelMarginTop);
+		mission13.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
+		mission13.setActionHandler(new ActionHandler() {
+			@Override
+			public void onAction() {
+				ScreenManager.gamePosition = GamePosition.GAME_LEVEL_13;
+				ScreenManager.tmpPosition = GamePosition.NEW;
+			}
+		});
+		screen.addButton(mission13);
+		
+		Button mission14 = new Button(850, 350, buttonWidth, buttonHeight, points.clone(), "mission14", labelMarginLeft, labelMarginTop);
+		mission14.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
+		mission14.setActionHandler(new ActionHandler() {
+			@Override
+			public void onAction() {
+				ScreenManager.gamePosition = GamePosition.GAME_LEVEL_14;
+				ScreenManager.tmpPosition = GamePosition.NEW;
+			}
+		});
+		screen.addButton(mission14);
+		
+		Button mission15 = new Button(1000, 350, buttonWidth, buttonHeight, points.clone(), "mission15", labelMarginLeft, labelMarginTop);
+		mission15.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
+		mission15.setActionHandler(new ActionHandler() {
+			@Override
+			public void onAction() {
+				ScreenManager.gamePosition = GamePosition.GAME_LEVEL_15;
+				ScreenManager.tmpPosition = GamePosition.NEW;
+			}
+		});
+		screen.addButton(mission15);
+		
+		Button mission16 = new Button(1150, 350, buttonWidth, buttonHeight, points.clone(), "mission16", labelMarginLeft, labelMarginTop);
+		mission16.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
+		mission16.setActionHandler(new ActionHandler() {
+			@Override
+			public void onAction() {
+				ScreenManager.gamePosition = GamePosition.GAME_LEVEL_16;
+				ScreenManager.tmpPosition = GamePosition.NEW;
+			}
+		});
+		screen.addButton(mission16);
+		
+		Button test1 = new Button(1100, 600, buttonWidth, buttonHeight, points.clone(), "Test 1", labelMarginLeft, labelMarginTop);
 		test1.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
 		test1.setActionHandler(new ActionHandler() {
 			@Override
@@ -125,16 +213,16 @@ public class CampaignScreen  {
 		});
 		screen.addButton(test1);
 		
-		Button test2 = new Button(1150, 600, buttonWidth, buttonHeight, points.clone(), "Test 2", labelMarginLeft, labelMarginTop);
-		test2.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
-		test2.setActionHandler(new ActionHandler() {
-			@Override
-			public void onAction() {
-				ScreenManager.gamePosition = GamePosition.GAME_LEVEL_TEST_2;
-				ScreenManager.tmpPosition = GamePosition.NEW;
-			}
-		});
-		screen.addButton(test2);
+//		Button test2 = new Button(1150, 600, buttonWidth, buttonHeight, points.clone(), "Test 2", labelMarginLeft, labelMarginTop);
+//		test2.setColors(buttonColor[0], buttonColor[1], buttonColor[2], buttonColor[3]);
+//		test2.setActionHandler(new ActionHandler() {
+//			@Override
+//			public void onAction() {
+//				ScreenManager.gamePosition = GamePosition.GAME_LEVEL_TEST_2;
+//				ScreenManager.tmpPosition = GamePosition.NEW;
+//			}
+//		});
+//		screen.addButton(test2);
 
 		
 		return screen;

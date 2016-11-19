@@ -2,10 +2,7 @@ package game.level;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.ListResourceBundle;
-import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
@@ -17,6 +14,8 @@ import org.newdawn.slick.Color;
 import game.core.Scene;
 import game.enemy.CommandToAttack;
 import game.enemy.UI;
+import game.enemy.UI1;
+import game.enemy.UI2;
 import game.object.Planet;
 import game.store.LevelDataStore;
 import game.store.PlanetMapper;
@@ -40,12 +39,14 @@ public class Level {
 		scene = new Scene(id);
 		this.loadLevel(ResourceStore.levelPath + "level1.xml");
 		initLevelMap();
+		uis.get(0).setAgression(2);
 		return this;
 	}
 	
 	public Level createLevel2(int id) {
 		scene = new Scene(id);
 		this.loadLevel(ResourceStore.levelPath + "level2.xml");
+		uis.get(0).setAgression(2);
 		initLevelMap();
 		return this;
 	}
@@ -91,6 +92,77 @@ public class Level {
 		scene = new Scene(id);
 		this.loadLevel(ResourceStore.levelPath + "level8.xml");
 		initLevelMap();
+//		uis.clear();
+//		UI ui = new UI2(ResourceStore.players.get(Color.green));
+//		uis.add(ui);
+		return this;
+	}
+	
+	public Level createLevel9(int id) {
+		scene = new Scene(id);
+		this.loadLevel(ResourceStore.levelPath + "level9.xml");
+		initLevelMap();
+		return this;
+	}
+	
+	public Level createLevel10(int id) {
+		scene = new Scene(id);
+		this.loadLevel(ResourceStore.levelPath + "level10.xml");
+		initLevelMap();
+		return this;
+	}
+	
+	public Level createLevel11(int id) {
+		scene = new Scene(id);
+		this.loadLevel(ResourceStore.levelPath + "level11.xml");
+		initLevelMap();
+		return this;
+	}
+	
+	public Level createLevel12(int id) {
+		scene = new Scene(id);
+		this.loadLevel(ResourceStore.levelPath + "level12.xml");
+		initLevelMap();
+		return this;
+	}
+	
+	public Level createLevel13(int id) {
+		scene = new Scene(id);
+		this.loadLevel(ResourceStore.levelPath + "level13.xml");
+		initLevelMap();
+		return this;
+	}
+	
+	public Level createLevel14(int id) {
+		scene = new Scene(id);
+		this.loadLevel(ResourceStore.levelPath + "level14.xml");
+		initLevelMap();
+		return this;
+	}
+	
+	public Level createLevel15(int id) {
+		scene = new Scene(id);
+		this.loadLevel(ResourceStore.levelPath + "level15.xml");
+		initLevelMap();
+		return this;
+	}
+	
+	public Level createLevel16(int id) {
+		scene = new Scene(id);
+		this.loadLevel(ResourceStore.levelPath + "level16.xml");
+		initLevelMap();
+		return this;
+	}
+	
+	public Level createTest(int id) {
+		scene = new Scene(id);
+		this.loadLevel(ResourceStore.levelPath + "level9.xml");
+		initLevelMap();
+//		uis.clear();
+//		UI ui = new UI2(ResourceStore.players.get(Color.green));
+//		uis.add(ui);
+//		UI ui2 = new UI2(ResourceStore.players.get(Color.red));
+//		uis.add(ui2);
 		return this;
 	}
 		
@@ -106,7 +178,7 @@ public class Level {
 			this.bcgIndex = lds.getBcgIndex();
 			this.planets = PlanetMapper.planetDataStoreToPlanet(lds.getPlanets());
 		} catch (JAXBException e) {
-			JOptionPane.showMessageDialog(null, "Level se nepodařilo načíst\n" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Level was not found\n" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -128,8 +200,13 @@ public class Level {
 					scene.setUser(ResourceStore.players.get(Config.playerColor));
 					planet.setOwner(ResourceStore.players.get(Config.playerColor));
 				} else if (planet.getOwnerTeam() > 1) {
-					planet.setOwner(ResourceStore.players.get(Util.selectUiColor()));
-					uis.add(new UI(ResourceStore.players.get(Util.selectUiColor()).getTeam()));
+					if (planet.getOwnerTeam() <= 3) {
+						planet.setOwner(ResourceStore.players.get(Util.selectUi1Color()));
+						uis.add(new UI1(ResourceStore.players.get(Util.selectUi1Color())));
+					} else {
+						planet.setOwner(ResourceStore.players.get(Util.selectUi2Color()));
+						uis.add(new UI2(ResourceStore.players.get(Util.selectUi2Color())));
+					}
 				}
 			}
 		}
@@ -158,7 +235,7 @@ public class Level {
 					planet.setOwner(ResourceStore.players.get(Config.playerColor));
 				} else if (planet.getOwnerTeam() > 1) {
 					planet.setOwner(ResourceStore.players.get(Util.selectUiColor(planet.getOwnerColor(), tmpPlayerColor)));
-					uis.add(new UI(ResourceStore.players.get(Util.selectUiColor(planet.getOwnerColor(), tmpPlayerColor)).getTeam()));
+					uis.add(new UI1(ResourceStore.players.get(Util.selectUiColor(planet.getOwnerColor(), tmpPlayerColor))));
 				}
 			}
 		}

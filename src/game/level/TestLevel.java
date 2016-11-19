@@ -3,7 +3,7 @@ package game.level;
 import org.newdawn.slick.Color;
 
 import game.core.Scene;
-import game.enemy.UI;
+import game.enemy.UI1;
 import game.object.Planet;
 import game.utils.Config;
 import game.utils.ResourceStore;
@@ -34,12 +34,12 @@ public class TestLevel extends AbstractLevel {
 		planets.get(planets.size()-1).setPopulation(100);;
 		
 		planets.add(new Planet(1020, 333, 40, planets.size(), 2, 100, 20));
-		planets.get(planets.size()-1).setOwner(ResourceStore.players.get(Util.selectUiColor()));
+		planets.get(planets.size()-1).setOwner(ResourceStore.players.get(Util.selectUi1Color()));
 		planets.get(planets.size()-1).setPopulationSpeedUp(2);
 		planets.get(planets.size()-1).setPopulation(100);
 		
 		
-		uis.add(new UI(ResourceStore.players.get(Util.selectUiColor()).getTeam()));
+		uis.add(new UI1(ResourceStore.players.get(Util.selectUi1Color())));
 //		uis.add(new UI(ResourceStore.players.get(Color.red).getTeam()));
 		scene.setUser(ResourceStore.players.get(Config.playerColor));	// user
 		

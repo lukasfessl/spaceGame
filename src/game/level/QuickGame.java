@@ -3,7 +3,7 @@ package game.level;
 import org.newdawn.slick.Color;
 
 import game.core.Scene;
-import game.enemy.UI;
+import game.enemy.UI1;
 import game.object.Planet;
 import game.utils.Config;
 import game.utils.ResourceStore;
@@ -54,7 +54,7 @@ public class QuickGame extends AbstractLevel {
 			}
 		}
 
-		uis.add(new UI(ResourceStore.players.get(Color.green).getTeam()));
+		uis.add(new UI1(ResourceStore.players.get(Color.green)));
 		planets.get(uiPlanet).setPopulation(30);
 		planets.get(uiPlanet).setOwner(ResourceStore.players.get(Color.green));
 		

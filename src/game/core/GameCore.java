@@ -1,6 +1,4 @@
 package game.core;
-import javax.annotation.Resources;
-
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -11,14 +9,11 @@ import org.newdawn.slick.SlickException;
 import game.level.AbstractLevel;
 import game.level.Level;
 import game.level.QuickGame;
-import game.level.TestLevel;
-import game.level.TestLevel2;
 import game.trans.Lang;
 import game.utils.Config;
 import game.utils.GamePosition;
 import game.utils.ResourceStore;
 import game.utils.ScreenManager;
-import game.utils.Util;
 
 /**
  * 
@@ -42,8 +37,6 @@ public class GameCore extends BasicGame {
 		pause = false;
 		menuSoundPlay = false;
 		ScreenManager.gamePosition = GamePosition.MENU_MAIN;
-//		ScreenManager.gamePosition = GamePosition.GAME;
-//		scene = new Level().createLevel1(-1).getScene();
 	}
 	
 	
@@ -58,6 +51,8 @@ public class GameCore extends BasicGame {
 			} else if (ResourceStore.progress == 1) {
 				ResourceStore.init(true);
 				menu = new Menu(gc);
+//				ScreenManager.gamePosition = GamePosition.GAME;
+//				scene = new Level().createTest(-1).getScene();
 			}
 		} else {
 			updateGame(gc, delta);
@@ -231,12 +226,27 @@ public class GameCore extends BasicGame {
 		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_8) {
 			scene = new Level().createLevel8(8).getScene();
 			playSound("gameMusic2", true); // Custom music
+		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_9) {
+			scene = new Level().createLevel9(9).getScene();
+		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_10) {
+			scene = new Level().createLevel10(10).getScene();
+		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_11) {
+			scene = new Level().createLevel11(11).getScene();
+		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_12) {
+			scene = new Level().createLevel12(12).getScene();
+		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_13) {
+			scene = new Level().createLevel13(13).getScene();
+		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_14) {
+			scene = new Level().createLevel14(14).getScene();
+		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_15) {
+			scene = new Level().createLevel15(15).getScene();
+		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_16) {
+			scene = new Level().createLevel16(16).getScene();
+			playSound("gameMusic2", true); // Custom music
 		}
 
 		if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_TEST_1) {
-			scene = new TestLevel(-1).getScene();
-		} else if (ScreenManager.gamePosition == GamePosition.GAME_LEVEL_TEST_2) {
-			scene = new TestLevel2(-1).getScene();
+			scene = new Level().createTest(-1).getScene();
 		}
 		
 		if (ScreenManager.gamePosition == GamePosition.GAME_QUICK) {

@@ -8,10 +8,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.geom.Vector2f;
 
 import game.enemy.UI;
+import game.enemy.UI1;
 import game.object.Explosion;
 import game.object.Owner;
 import game.object.Planet;
@@ -136,7 +136,6 @@ public class Scene {
 					startPlanet = planet;
 //					System.out.println(planet.getPosition().toString());
 				} else {
-//					System.out.println("x:"+gc.getInput().getMouseX()+",y:"+gc.getInput().getMouseY());
 				}
 			}
 			mousePress = true;

@@ -1,14 +1,10 @@
 package game.level;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import org.newdawn.slick.Color;
 
 import game.core.Scene;
 import game.enemy.UI;
-import game.object.Owner;
 import game.object.Planet;
 import game.utils.Config;
 import game.utils.ResourceStore;

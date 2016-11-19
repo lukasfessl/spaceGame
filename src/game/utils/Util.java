@@ -12,8 +12,12 @@ public class Util {
 		return false;
 	}
 	
-	public static Color selectUiColor() {
+	public static Color selectUi1Color() {
 		return Util.compColor(Color.green, Config.playerColor) ? Color.red : Color.green;
+	}
+	
+	public static Color selectUi2Color() {
+		return Util.compColor(Color.blue, Config.playerColor) ? Color.yellow : Color.blue;
 	}
 	
 	public static Color selectUiColor(Color uiColor, Color replacementColor) {
