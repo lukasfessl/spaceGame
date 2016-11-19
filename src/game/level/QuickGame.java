@@ -64,7 +64,7 @@ public class QuickGame extends AbstractLevel {
 		
 		scene.setPlanets(planets);
 		scene.setUIs(uis);
-		scene.setBackground(ResourceStore.backgrounds.get(0));
+		scene.setBackground(ResourceStore.images.get("bcg_2"));
 	}
 
 	

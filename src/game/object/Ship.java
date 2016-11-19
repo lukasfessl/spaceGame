@@ -43,7 +43,7 @@ public class Ship {
 		currentPossition.set(currentPossition.getX() + sizeStep.getX() * (from.getRadius() / 4), currentPossition.getY() + sizeStep.getY() * (from.getRadius() / 4));
 		currentStep = (from.getRadius() / 4) + (to.getRadius() / 4); 
 		
-		image = ResourceStore.ship.copy(); 
+		image = ResourceStore.images.get("ship").copy(); 
 		double degrees = Math.acos(((float)to.getPositionX() - (float)from.getPositionX()) / (from.getPosition().distance(to.getPosition())));
 
 		if ((float)to.getPositionY() < (float)from.getPositionY()) {

@@ -107,19 +107,19 @@ public class Menu {
 	
 	// Menu
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		g.drawImage(ResourceStore.backgrounds.get(0), 0, 0, 1366, 768, 0, 0, 1366, 768);
-		g.drawImage(ResourceStore.items.get("logo"), 0 + 233, 0 + 75, 900 + 233, 80 + 75, 0, 0, 900, 80);
+		g.drawImage(ResourceStore.images.get("bcg_0"), 0, 0, 1366, 768, 0, 0, 1366, 768);
+		g.drawImage(ResourceStore.images.get("logo"), 0 + 233, 0 + 75, 900 + 233, 80 + 75, 0, 0, 900, 80);
 		screens.get(ScreenManager.gamePosition).render(gc, g);
 		if (ScreenManager.gamePosition == GamePosition.MENU_CAMPAIGN_SELECT) {
 			int count = 0;
 			for (Button button : screens.get(GamePosition.MENU_CAMPAIGN_SELECT).getButtons()) {
 				if (button.getLabel().toLowerCase().startsWith("mission")) {
 					if (button.isDisabled()) {
-						g.drawImage(ResourceStore.items.get("lock"), button.getMask().getX() + 30 , button.getMask().getY() + 30 , button.getMask().getX() + 91, button.getMask().getY() + 91, 0, 0, 
+						g.drawImage(ResourceStore.images.get("lock"), button.getMask().getX() + 30 , button.getMask().getY() + 30 , button.getMask().getX() + 91, button.getMask().getY() + 91, 0, 0, 
 								128, 128, Color.red);
 					}
 					if (Config.unlockedLevel > count + 1) {
-						g.drawImage(ResourceStore.items.get("check"), button.getMask().getX() + 30 , button.getMask().getY() + 30 , button.getMask().getX() + 91, button.getMask().getY() + 91, 0, 0, 
+						g.drawImage(ResourceStore.images.get("check"), button.getMask().getX() + 30 , button.getMask().getY() + 30 , button.getMask().getX() + 91, button.getMask().getY() + 91, 0, 0, 
 								128, 128, Color.green);
 					}
 					count ++;

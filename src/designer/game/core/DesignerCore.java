@@ -48,10 +48,10 @@ public class DesignerCore extends BasicGame {
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
-		ResourceStore.init();
+		ResourceStore.init(false);
 		this.pw = new PropertiesWindow(this);
 		this.bcgIndex = 0;
-		this.bcg = ResourceStore.backgrounds.get(bcgIndex);
+		this.bcg = ResourceStore.images.get("bcg_" + bcgIndex);
 		pw.textFieldBackground.setText(Integer.toString(bcgIndex));
 	}
 
@@ -125,7 +125,7 @@ public class DesignerCore extends BasicGame {
 			this.clearData = false;
 			this.planets.clear();
 			this.bcgIndex = 0;
-			bcg = ResourceStore.backgrounds.get(bcgIndex);
+			bcg = ResourceStore.images.get("bcg_" + bcgIndex);
 		}
 	}
 
@@ -221,8 +221,8 @@ public class DesignerCore extends BasicGame {
 	}
 	
 	public void update(KeyWord key, int value) {
-		if (key == KeyWord.BACKGROUND &&  ResourceStore.backgrounds.size() > value) {
-			this.bcg = ResourceStore.backgrounds.get(value);
+		if (key == KeyWord.BACKGROUND) {
+			this.bcg = ResourceStore.images.get("bcg_" + value);
 			this.bcgIndex = value;
 		}
 	}

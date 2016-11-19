@@ -1,4 +1,6 @@
 package game.core;
+import javax.annotation.Resources;
+
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -37,18 +39,32 @@ public class GameCore extends BasicGame {
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		ResourceStore.init();
 		pause = false;
 		menuSoundPlay = false;
 		ScreenManager.gamePosition = GamePosition.MENU_MAIN;
-		menu = new Menu(gc);
 //		ScreenManager.gamePosition = GamePosition.GAME;
 //		scene = new Level().createLevel1(-1).getScene();
 	}
 	
+	
+	// -- update methods --
 
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {	
+		if (ResourceStore.progress < 100) {
+			// skip first update to render loading text
+			if (ResourceStore.progress == 0) {
+				ResourceStore.progress = 1;
+			} else if (ResourceStore.progress == 1) {
+				ResourceStore.init(true);
+				menu = new Menu(gc);
+			}
+		} else {
+			updateGame(gc, delta);
+		}
+	}	
+	
+	public void updateGame(GameContainer gc, int delta) throws SlickException {
 		// Menu
 		if (ScreenManager.gamePosition.toString().startsWith(GamePosition.MENU.toString())) {
 			// Sound
@@ -129,8 +145,6 @@ public class GameCore extends BasicGame {
 			}
 		}
 
-
-		
 		if (gc.getInput().isKeyPressed(Input.KEY_R) ) {
 			Config.unlockedLevel = 1;
 			Config.save();
@@ -152,10 +166,21 @@ public class GameCore extends BasicGame {
 			}
 			ResourceStore.initTranslation();
 		}
-	}	
+	}
+	
+	
+	// -- render methods --
 	
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
+		if (ResourceStore.progress < 100) {
+			g.drawString("Loading...", 10, 740);
+		} else {
+			renderGame(gc, g);
+		}
+	}
+	
+	public void renderGame(GameContainer gc, Graphics g) throws SlickException {
 		// Render Menu
 		if (ScreenManager.gamePosition.toString().startsWith(GamePosition.MENU.toString())) {
 			menu.render(gc, g);
@@ -177,17 +202,8 @@ public class GameCore extends BasicGame {
 			if (ScreenManager.tmpPosition == GamePosition.PAUSE) {
 				menu.renderPauseMenu(gc, g);
 			}	
-			
-//			g.setColor(Color.red);
-//			g.resetLineWidth(1);
-//			for (int col = 0; col < 5; col++) {
-//				for (int row = 0; row < 3; row++) {
-//					g.drawRect(col*(Config.windowWidth/5) , row*(Config.windowHeight/3), Config.windowWidth/5, Config.windowHeight/3);
-//				}
-//			}
 		}	
 	}
-	
 	
 	private void initScene() {
 		if (ResourceStore.currentMusic != null && Config.sound) {
@@ -236,7 +252,6 @@ public class GameCore extends BasicGame {
 	}
 	
 	private void playSound(String name, boolean manualSoundSet) {
-		
 		if (Config.sound) {	
 			if (!this.menuSoundPlay) {
 				this.menuSoundPlay = true;
@@ -264,6 +279,4 @@ public class GameCore extends BasicGame {
 		}
 	}
 	
-
-
 }

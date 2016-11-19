@@ -136,7 +136,7 @@ public class Level {
 		
 		scene.setUIs(uis);
 		scene.setPlanets(planets);
-		scene.setBackground(ResourceStore.backgrounds.get(this.bcgIndex));		
+		scene.setBackground(ResourceStore.images.get("bcg_" + this.bcgIndex));
 	}
 	
 	/**
@@ -165,7 +165,7 @@ public class Level {
 		
 		scene.setUIs(uis);
 		scene.setPlanets(planets);
-		scene.setBackground(ResourceStore.backgrounds.get(this.bcgIndex));
+		scene.setBackground(ResourceStore.images.get("bcg_" + this.bcgIndex));		
 	}
 	
 	

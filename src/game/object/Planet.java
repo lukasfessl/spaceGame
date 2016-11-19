@@ -49,7 +49,7 @@ public class Planet implements PlanetI {
 		this.populationMaxTimer = 1000;
 		this.speedUp = 1;
 		this.populationCurrenTimer = 0;
-		image = ResourceStore.planets;	
+		image = ResourceStore.images.get("planets");
 		this.planetType = planetType;
 		this.populationMaxConst = populationMaxConst;
 		this.populationSmallMaxConst = populationSmallMaxConst;
