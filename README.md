@@ -1,7 +1,7 @@
 # Battle of the planets
 
 
-This is a small strategic game. Your goal is simply. You have to occupy neighboring planets and defeat enemies.
+This is a small strategic game. Your goal is simple. You have to occupy neighboring planets and defeat enemies.
 
 All you need is a quick decision and fast hand
 
